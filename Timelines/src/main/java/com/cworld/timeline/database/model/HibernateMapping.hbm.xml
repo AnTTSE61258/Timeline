@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.cworld.timeline.database.model">
+	<class name="Item" table="Item">
+		<id name="itemId" column="itemId">
+			<generator class="increment" />
+		</id>
+		<property name="channel" column="channel" />
+		<property name="title" column="title" />
+		<property name="description" column="description" />
+		<property name="pubDate" column="pubDate" />
+		<property name="link" column="link" />
+		<property name="guid" column="guid" />
+		<property name="addDate" column="addDate" />
+		<property name="category" column="category"/>
+		<property name="seourl" column="seourl"/>
+		<property name="desWithoutImage" column="desWithoutImage"/>
+		<property name="smallImage" column="smallImage"/>
+	</class>
+
+</hibernate-mapping>
