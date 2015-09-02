@@ -14,6 +14,7 @@ public class SLIM {
 	
 	public static final String CHANNEL_VNEXPRESS = "VNEXPRESS";
 	public static final String CHANNEL_KENH14 = "KENH14";
+	public static final String CHANNEL_DANTRI = "DANTRI";
 	
 	// VNEXPRESS
 	public static final String VNEXPRESS_TRANGCHU = "http://vnexpress.net/rss/tin-moi-nhat.rss";
@@ -88,8 +89,7 @@ public class SLIM {
 			KENH14_SUCKHOEGIOITINH, KENH14_MADEBYME, KENH14_SPORT,
 			KENH14_KHAMPHA, KENH14_HITEK, KENH14_LACOOL, KENH14_HOCDUONG};
 
-	public static final String[] vnexpressCategory = {"Trang Chu", "Thoi Su"};
-	public static final String[] kenh14Category = {"Trang Chu","Star","Musiz"};
+
 }
 
 
