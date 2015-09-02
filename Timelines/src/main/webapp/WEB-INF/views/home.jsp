@@ -397,5 +397,20 @@
 			console.log("ViewDetails");
 			var url = "${dtItemLink}";
 			handleDetailItem(url);
+			
+			window.onscroll = function(ev)
+			{
+				var B = document.body; //IE 'quirks'
+			    var D = document.documentElement; //IE with doctype
+			    var h = $(window).height();
+			    D= (D.clientHeight)? D: B;
+				
+				if (D.scrollTop == 0) {
+					getNext();
+				}        
+				if (D.scrollHeight - D.scrollTop == h) {
+					getPrevious();
+				}
+			};
 		});
 	</script>
