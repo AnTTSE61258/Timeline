@@ -57,7 +57,23 @@
 
 <script type="text/javascript"
 	src='<c:url value="/resources/js/jquery.cookie.js"/>'></script>	
-	
+
+<style type="text/css">
+#btn-newnews {
+	position: fixed;
+	padding: 5px 10px;	
+	border-radius: 5px;
+	display: table;
+	z-index: 100;
+	color: #000;
+	background: #ffff99;
+	margin: 10px 39%;
+	display: table;
+	box-shadow: 5px 5px 3px #888;
+	cursor: pointer;
+	visibility: collapse;
+}
+</style>	
 </head>
 <body class="home blog">
 
@@ -81,25 +97,25 @@
 				document.body.style.overflow = 'scroll';
 			})
 		});
-	</script>
-
-
-
+	</script>	
+	
 	<div class="">
 		<img id="background" class="main-listing-bg"
 			src='<c:url value="/resources/img/background.jpg"/>' alt="">
 	</div>
-	<section class="main-listing">
+	<section class="main-listing">		
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
+					<div id="btn-newnews" onclick="gotop();">
+						Tin mới <span style="font-size:20px;">&#9757;</span>
+					</div>					
 					<div id="loadNewButton" class="cd-timeline-block load-more-block"
 						style="margin-bottom: 100px">
 						<div class="cd-timeline-year">
 							<h2>
 								<a href="javascript:;" onclick="getNext()"><c:out
 										value="Refresh"></c:out></a>
-
 							</h2>
 						</div>
 						<!-- cd-timeline-img -->
@@ -239,14 +255,11 @@
 		</div>
 	</div>
 	</div>
-
-
-
-
-
-
-
+		
 	<script>
+		//every 3 second, check has new news or not?
+		var myNews = setTimeout(function(){checknews();}, 1000*60);
+	
 		function getNext() {
 			jQuery.ajax({
 				type : "GET",
@@ -264,7 +277,6 @@
 					alert(data)
 				}
 			});
-
 		}
 
 		function getPrevious() {
@@ -300,12 +312,46 @@
 		function showModal() {
 			jQuery("#mainModal").modal('show');
 		}
+		
+		function checknews() {
+			myNews = setTimeout(function(){checknews();}, 1000*60);
+			
+			jQuery.ajax({
+				type : "GET",
+				url : "getNext",
+				data : {
+					nextPoint : nextPoint
+				},
+				success : function(data) {
+					if (data.length === 0) {
+						jQuery("#btn-newnews").css("visibility", "collapse");
+						return;
+					}
+										
+					jQuery("#btn-newnews").css("visibility", "visible");
+					window.clearTimeout(myNews);
+				},
+				error : function(data) {
+					jQuery("#btn-newnews").css("visibility", "collapse");					
+				}
+			});			
+		}		
+		
+		function gotop() {
+			jQuery('html, body').animate({ scrollTop: 0 }, 'fast');
+			getNext();
+			jQuery("#btn-newnews").css("visibility", "collapse");
+			
+			window.clearTimeout(myNews);
+			//every 3 second, check has new news or not?
+			myNews = setTimeout(function(){checknews();}, 1000*60);
+		}							
 
 		$(document).ready(function() {
 
 			console.log("ViewDetails");
 			var url = "${dtItemLink}";
-			handleDetailItem(url);
+			handleDetailItem(url);						
 			
 			window.onscroll = function(ev)
 			{
@@ -313,10 +359,11 @@
 			    var D = document.documentElement; //IE with doctype
 			    var h = $(window).height();
 			    D= (D.clientHeight)? D: B;
-				
+				/*
 				if (D.scrollTop == 0) {
 					getNext();
-				}        
+				}
+				*/       
 				if (D.scrollHeight - D.scrollTop == h) {
 					getPrevious();
 				}
