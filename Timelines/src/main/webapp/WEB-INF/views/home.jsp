@@ -365,7 +365,7 @@
 					addItemsToHead(data);
 				},
 				error : function(data) {
-					alert(data)
+					alert("getNextFail: " +data)
 				}
 			});
 		}
@@ -393,7 +393,7 @@
 			for (var i = 0; i < newItems.length; i++) {
 				addOneItemToHead(newItems[i], i);
 			}
-			nextPoint = newItem[0].seourl;
+			nextPoint = newItems[0].seourl;
 		}
 
 		function hideModal() {

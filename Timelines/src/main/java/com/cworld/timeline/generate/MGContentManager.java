@@ -128,7 +128,7 @@ public class MGContentManager {
 		System.out.println(position);
 		int currentPosition = position;
 		Item item;
-		while (currentPosition < (numberOfItem + position) && currentPosition < currentItems.size()) {
+		while (items.size()<numberOfItem && currentPosition < currentItems.size()) {// 5_9 fix issue getPreviousItems
 			item = currentItems.get(currentPosition);
 			if (item.getChannel() != null && item.getChannel().equals(SLIM.CHANNEL_VNEXPRESS)) {
 				if (item.getCategory() != null && vnexpressChn.contains(item.getCategory())) {
