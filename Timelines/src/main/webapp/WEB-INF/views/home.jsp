@@ -55,8 +55,10 @@
 <script type="text/javascript"
 	src='<c:url value="/resources/js/selectchn.js"/>'></script>
 
-<script type="text/javascript"
-	src='<c:url value="/resources/js/jquery.cookie.js"/>'></script>	
+<script type="text/javascript" 
+	src='<c:url value="/resources/js/jquery.cookie.js"/>'>
+
+</script>	
 
 <style type="text/css">
 #btn-newnews {
@@ -74,6 +76,7 @@
 	visibility: collapse;
 }
 </style>	
+
 </head>
 <body class="home blog">
 
@@ -91,6 +94,12 @@
 			previousPoint = "${items[fn:length(items)-1].seourl }";
 			nextPoint = "${items[0].seourl}";
 			$('#mainModal').on('shown.bs.modal', function() {
+				document.body.style.overflow = 'hidden';
+				$('#modalContent').scrollTop(0);
+			}).on('hidden.bs.modal', function() {
+				document.body.style.overflow = 'scroll';
+			})
+			$('#selectChannelModal').on('shown.bs.modal', function() {
 				document.body.style.overflow = 'hidden';
 				$('#modalContent').scrollTop(0);
 			}).on('hidden.bs.modal', function() {
@@ -197,12 +206,6 @@
 
 
 
-	<!-- THIS ARER FOR SELECT CHANNEL -->
-	<img id="selectchn-icon" onclick="selectchnPopupDisplay()"
-		alt="SELECT CHANNEL"
-		src='<c:url value="/resources/img/selectchn-icon.png"/>'>
-
-
 
 	<!-- Main modal -->
 	<div id="mainModal" class="modal fade bs-example-modal-lg"
@@ -222,8 +225,14 @@
 	</div>
 	</div>
 
+	<!-- THIS ARER FOR SELECT CHANNEL -->
+	<img id="selectchn-icon" onclick="selectchnPopupDisplay()"
+		alt="SELECT CHANNEL"
+		src='<c:url value="/resources/img/selectchn-icon.png"/>'>
 
-	<c:set var="abc" value="${vnexpressCategory }"></c:set>
+
+
+
 	<!-- Select Channel modal -->
 	<div id="selectChannelModal" class="modal fade " tabindex="-1"
 		role="dialog" aria-labelledby="myLargeModalLabel">
@@ -231,25 +240,107 @@
 			<div id="iconCloseBound">
 				<img id="icon-close" alt="Close"
 					src='<c:url value="/resources/img/close-icon.png"/>'
-					onclick="hideModal()">
+					onclick="hideSelectChnModal()">
 			</div>
 			<div id="selectChannelModalContent" class="modal-content"
 				style="min-height: 70vh; overflow: auto; max-height: 90vh; padding: 4vh;">
-				<c:forEach var="cateItem" items="${vnexpressCategory}">
-					<div class="[ form-group ]">
-						<input class="checkbox-chn" name="fancy-checkbox-default" id="fancy-checkbox-${cateItem}-vnexpress"
-							value="${cateItem}" autocomplete="off" type="checkbox">
-						<div class="[ btn-group ]">
-							<label style="border-radius: 10px 0px;"
-								for="fancy-checkbox-${cateItem}-vnexpress" class="[ btn btn-default">
-								<span class="[ glyphicon glyphicon-ok ]"></span> <span>&nbsp;</span>
-							</label> <label style="border-radius: 0px 0px 0px 5px;"
-								for="fancy-checkbox-${cateItem}-vnexpress" class="[ btn btn-default active ]">
-								${cateItem }</label>
-						</div>
+
+				<div class="row">
+					<!-- Vnexpress_Category -->
+					<div id="categoryBound_vnexpress" class="col-md-4"">
+						<img class="newslogo" alt="Vnexpess"
+							src='<c:url value="/resources/img/logo/logo_vnexpress.jpg"/>'
+							style="margin-left: 20%">
+
+
+						<c:forEach var="cateItem" items="${vnexpressCategory}">
+							<div class="[ form-group ]">
+								<input class="checkbox-chn" name="fancy-checkbox-default"
+									id="fancy-checkbox-${cateItem.cookie}-vnexpress"
+									value="${cateItem.cookie}" autocomplete="off" type="checkbox">
+								<div class="[ btn-group ]" style="width: 80%; margin-left: 20%">
+									<label
+										style="border-radius: 10px 0px; background: #9F224E none repeat scroll 0% 0%;"
+										for="fancy-checkbox-${cateItem.cookie}-vnexpress"
+										class="[ btn btn-default"> <span
+										class="[ glyphicon glyphicon-ok ]"></span> <span>&nbsp;</span>
+									</label> <label style="border-radius: 0px 0px 0px 5px; width: 60%;"
+										"
+										for="fancy-checkbox-${cateItem.cookie}-vnexpress"
+										class="[ btn btn-default active ]">
+										${cateItem.displayName}</label>
+								</div>
+							</div>
+
+						</c:forEach>
 					</div>
-				</c:forEach>
-				<button onclick="saveCookie()">Save cookie</button>
+					<!-- Vnexpress_Category -->
+					<div id="categoryBound_kenh14" class="col-md-4">
+						<!-- Kenh14_Category -->
+						<img class="newslogo" alt="Kenh14"
+							src='<c:url value="/resources/img/logo/logo_kenh14.jpg"/>'
+							style="margin-left: 20%">
+
+						<c:forEach var="cateItem" items="${kenh14Category}">
+							<div class="[ form-group ]">
+								<input class="checkbox-chn" name="fancy-checkbox-default"
+									id="fancy-checkbox-${cateItem.cookie}-vnexpress"
+									value="${cateItem.cookie}" autocomplete="off" type="checkbox">
+								<div class="[ btn-group ]" style="width: 80%; margin-left: 20%">
+									<label
+										style="border-radius: 10px 0px; background: #C44718 none repeat scroll 0% 0%;"
+										for="fancy-checkbox-${cateItem.cookie}-vnexpress"
+										class="[ btn btn-default"> <span
+										class="[ glyphicon glyphicon-ok ]"></span> <span>&nbsp;</span>
+									</label> <label style="border-radius: 0px 0px 0px 5px; width: 60%;"
+										for="fancy-checkbox-${cateItem.cookie}-vnexpress"
+										class="[ btn btn-default active ]">
+										${cateItem.displayName}</label>
+								</div>
+							</div>
+						</c:forEach>
+
+						<!-- Kenh14_Category -->
+					</div>
+					<div id="categoryBound_dantri" class="col-md-4">
+						<!-- DanTri_category -->
+						<img class="newslogo" alt="Kenh14"
+							src='<c:url value="/resources/img/logo/logo_dantri.jpg"/>'
+							style="margin-left: 20%">
+
+						<c:forEach var="cateItem" items="${dantriCategory}">
+							<div class="[ form-group ]">
+								<input class="checkbox-chn" name="fancy-checkbox-default"
+									id="fancy-checkbox-${cateItem.cookie}-vnexpress"
+									value="${cateItem.cookie}" autocomplete="off" type="checkbox">
+								<div class="[ btn-group ]" style="width: 80%; margin-left: 20%">
+									<label
+										style="border-radius: 10px 0px; background: #00622A none repeat scroll 0% 0%;"
+										for="fancy-checkbox-${cateItem.cookie}-vnexpress"
+										class="[ btn btn-default"> <span
+										class="[ glyphicon glyphicon-ok ]"></span> <span>&nbsp;</span>
+									</label> <label style="border-radius: 0px 0px 0px 5px; width: 60%;"
+										for="fancy-checkbox-${cateItem.cookie}-vnexpress"
+										class="[ btn btn-default active ]">
+										${cateItem.displayName}</label>
+								</div>
+							</div>
+						</c:forEach>
+
+						<!-- DanTricategory -->
+					</div>
+				</div>
+				<div id="getFeedBack">
+					<div class="form-group" align="center" style="margin-left: 10%">
+						<p><i>Không tìm thấy trang yêu thích của bạn? Hảy gửi yêu cầu cho
+							chúng tôi</i></p>
+
+						<input type="text" class="form-control" id="feedBackContent"
+							style="width: 70%; float: left;"> <input type="button"
+							class="btn" style="width: 10" value="Gửi">
+					</div>
+
+				</div>
 			</div>
 
 		</div>
@@ -309,6 +400,10 @@
 			jQuery("#mainModal").modal('hide');
 		}
 
+		function hideSelectChnModal() {
+			jQuery("#selectChannelModal").modal('hide');
+		}
+
 		function showModal() {
 			jQuery("#mainModal").modal('show');
 		}
@@ -348,7 +443,6 @@
 		}							
 
 		$(document).ready(function() {
-
 			console.log("ViewDetails");
 			var url = "${dtItemLink}";
 			handleDetailItem(url);						

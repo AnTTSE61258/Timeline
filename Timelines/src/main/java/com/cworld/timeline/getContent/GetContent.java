@@ -19,7 +19,12 @@ public class GetContent {
 			modResponse = ModResponseForVnexpress.modResponse(rawResponse);
 			return modResponse;
 		}
-
+		
+		if (url.contains("dantri.com.vn")) {
+			modResponse = ModResponseForDanTri.modResponse(rawResponse);
+			return modResponse;
+		}
+		
 		return null;
 
 	}

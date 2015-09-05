@@ -10,6 +10,7 @@ import java.util.Locale;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cworld.timeline.category.SLIMCategory;
 import com.cworld.timeline.core.SLIM;
 import com.cworld.timeline.database.dao.ItemDAO;
 import com.cworld.timeline.database.model.Item;
@@ -45,32 +47,30 @@ public class HomeController {
 
 	/**
 	 * Simply selects the home view to render by returning its name.
-	 * @throws UnsupportedEncodingException 
+	 * 
+	 * @throws UnsupportedEncodingException
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
-	public String home(Locale locale, Model model,HttpServletRequest request) throws UnsupportedEncodingException {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		List<Item> items = mgContentManager.getFirstItem(20);
-		model.addAttribute("items", items);
-		model.addAttribute("vnexpressCategory", SLIM.vnexpressCategory);
-		model.addAttribute("kenh14Category", SLIM.kenh14Category);
-		
-		Cookie[] cookies = request.getCookies();
+	public String home(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response)
+			throws UnsupportedEncodingException {
 
-		if (cookies != null) {
-		 for (Cookie cookie : cookies) {
-		   if (cookie.getName().equals("vnexpress_chn")) {
-		     System.out.println("OK men. I found my cookie");
-		     System.out.println(URLDecoder.decode(cookie.getValue(), "UTF-8"));
-		    }
-		  }
+		Cookie[] cookies = request.getCookies();
+		if (cookies == null) {
+			Cookie defaultCookie = new Cookie("vnexpress_chn", SLIMCategory.vnexpress_TrangChu.getCookie() + ","
+					+ SLIMCategory.kenh14_TrangChu.getCookie() + "," + SLIMCategory.dantri_TrangChu.getCookie());
+			response.addCookie(defaultCookie);
+			cookies = new Cookie[1];
+			cookies[0] = defaultCookie;
 		}
-		
+
+		List<Item> items = mgContentManager.getFirstItemWithCookie(20, cookies);
+		model.addAttribute("items", items);
+		MGContentManager.addCategoryToModel(model);
 		return "home";
 	}
 
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
-	public String getContent(Locale locale, Model model) {
+	public String getContent(Locale locale, Model moßdel) {
 		System.setProperty("http.agent", USER_AGENT);
 		updateService.startService();
 		updateService.startUpdateCacheListService();
@@ -93,10 +93,12 @@ public class HomeController {
 
 	@RequestMapping(value = "/getPrevious", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Item> getPreviousItems(Locale locale, Model model, @RequestParam String previousPoint) {
+	public List<Item> getPreviousItems(Locale locale, Model model, @RequestParam String previousPoint, HttpServletRequest request) {
 		System.out.println("GET PREVIOUS FROM: " + previousPoint + ";");
-		List<Item> previousItems = mgContentManager.getPreviousItem(9, previousPoint);
-		// List<Item> previousItems = itemDAO.getPreviosItems(fromTimestamp, 2);
+		Cookie[] cookies = request.getCookies();
+		// List<Item> previousItems = mgContentManager.getPreviousItem(9,
+		// previousPoint);
+		List<Item> previousItems = mgContentManager.getPreviousItemWithCookie(9, previousPoint, cookies);
 		for (int i = 0; i < previousItems.size(); i++) {
 			System.out.println(previousItems.get(i).getAddDate());
 		}
@@ -130,7 +132,7 @@ public class HomeController {
 	@ResponseBody
 	public String getTargetResponse(Locale locale, Model model, @RequestParam String url) throws Exception {
 		System.out.println("GET Target Response Url" + url);
-		
+
 		String response;
 		try {
 			response = GetContent.getContent(url);
