@@ -112,6 +112,14 @@ public class HomeController {
 		List<Item> nextItems = mgContentManager.getNextItem(9, nextPoint);
 		return nextItems;
 	}
+	
+	@RequestMapping(value = "/hasNews", method = RequestMethod.GET)
+	@ResponseBody
+	public boolean checknews(Locale locale, Model model, @RequestParam String nextPoint) {
+		System.out.println("CHECK NEWS FROM: " + nextPoint + ";");
+		boolean hasNews = mgContentManager.hasNews(nextPoint);
+		return hasNews;
+	}
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String admin(Locale locale, Model model) {

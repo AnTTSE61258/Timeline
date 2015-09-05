@@ -347,10 +347,7 @@
 	</div>
 	</div>
 		
-	<script>
-		//every 3 second, check has new news or not?
-		var myNews = setTimeout(function(){checknews();}, 1000*60);
-	
+	<script>	
 		function getNext() {
 			jQuery.ajax({
 				type : "GET",
@@ -409,27 +406,24 @@
 		}
 		
 		function checknews() {
-			myNews = setTimeout(function(){checknews();}, 1000*60);
-			
 			jQuery.ajax({
 				type : "GET",
-				url : "getNext",
+				url : "hasNews",
 				data : {
 					nextPoint : nextPoint
 				},
 				success : function(data) {
-					if (data.length === 0) {
+					if (!data) {
 						jQuery("#btn-newnews").css("visibility", "collapse");
-						return;
-					}
-										
+						return myNews = setTimeout(function(){checknews();}, 1000*60);
+					}					
+					
 					jQuery("#btn-newnews").css("visibility", "visible");
-					window.clearTimeout(myNews);
 				},
 				error : function(data) {
-					jQuery("#btn-newnews").css("visibility", "collapse");					
+					jQuery("#btn-newnews").css("visibility", "collapse");
 				}
-			});			
+			});				
 		}		
 		
 		function gotop() {
@@ -437,10 +431,12 @@
 			getNext();
 			jQuery("#btn-newnews").css("visibility", "collapse");
 			
-			window.clearTimeout(myNews);
-			//every 3 second, check has new news or not?
+			//window.clearTimeout(myNews);
+			//check has new news or not?
 			myNews = setTimeout(function(){checknews();}, 1000*60);
-		}							
+		}
+		//check has new news or not?
+		var myNews = setTimeout(function(){checknews();}, 1000*60);
 
 		$(document).ready(function() {
 			console.log("ViewDetails");

@@ -176,6 +176,18 @@ public class MGContentManager {
 		return items;
 
 	}
+	
+	public boolean hasNews(String nextPoint) {
+		Item demoItem = new Item();
+		demoItem.setSeourl(nextPoint);
+		System.out.println(nextPoint);
+		int position = currentItems.indexOf(demoItem);
+		if (position < 0) {
+			return false;
+		}
+		
+		return true;
+	}
 
 	public boolean refreshCurrentItems() {
 
