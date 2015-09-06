@@ -182,7 +182,7 @@ public class MGContentManager {
 		demoItem.setSeourl(nextPoint);
 		System.out.println(nextPoint);
 		int position = currentItems.indexOf(demoItem);
-		if (position < 0) {
+		if (position <= 0) {
 			return false;
 		}
 		
