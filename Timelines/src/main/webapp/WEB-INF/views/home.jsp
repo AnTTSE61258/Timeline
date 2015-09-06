@@ -108,19 +108,6 @@
 
 
 				<div class="col-md-12">
-				
-					<div id="displayNotificationTest" class="cd-timeline-block load-more-block"
-						style="margin-bottom: 100px">
-						<div class="cd-timeline-year">
-							<h2>
-								<a href="javascript:;" onclick="displayNotification()"><c:out
-										value="Display notification"></c:out></a>
-
-							</h2>
-						</div>
-						<!-- cd-timeline-img -->
-					</div>
-					
 					<div id="loadNewButton" class="cd-timeline-block load-more-block"
 						style="margin-bottom: 100px">
 						<div class="cd-timeline-year">
