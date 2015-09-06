@@ -27,7 +27,8 @@
 	media='all' />
 <link rel='stylesheet' href='<c:url value="/resources/css/style.css"/>'
 	type='text/css' media='all' />
-<link rel='stylesheet' href='<c:url value="/resources/css/jquery.mmenu.all.css"/>'
+	
+<link rel='stylesheet' href='<c:url value="/resources/css/animate.css"/>'
 	type='text/css' media='all' />
 <link rel='stylesheet' href='<c:url value="/resources/css/menu.css"/>'
 	type='text/css' media='all' />
@@ -60,8 +61,8 @@
 <script type="text/javascript"
 	src='<c:url value="/resources/js/jquery.cookie.js"/>'></script>
 
-<%-- <script type="text/javascript"
-	src='<c:url value="/resources/js/jquery.mmenu.min.all.js"/>'></script> --%>
+<script type="text/javascript"
+	src='<c:url value="/resources/js/bootstrap-notify.min.js"/>'></script>
 
 <script type="text/javascript"
 	src='<c:url value="/resources/js/new-menu.js"/>'></script>
@@ -116,19 +117,7 @@
 			menuAPI.open();
 		}
 	</script>
-	
-	
-	
-	
-	
-	<!-- Sidebar section -->
-	<!-- <nav id="my-menu">
-		<ul id="menu-side-menu" >
-			<li><a href="#inline">Home</a></li>
-			<li><a href="#inline">Favorites</a></li>
-		</ul>
-	</nav> -->
-	
+
 	<nav id="mmenu" class="menu-side-menu-container mm-menu mm-horizontal mm-slide mm-offcanvas" style="visibility: visible;">
 		<ul id="menu-side-menu" class="nav mm-list mm-panel mm-opened mm-current">
 			<li class="menu-item menu-item-type-custom menu-item-object-custom "><a href="#inline">Home</a></li>
@@ -140,100 +129,109 @@
 	</nav>
 	
 	
-	<div id="page" class="mmenu-page mm-page" style="">
-	<div class="">
 	
+	<div id="page" class="mmenu-page" style="">
+	<div class="">
 		<img id="background" class="main-listing-bg"
 			src='<c:url value="/resources/img/background.jpg"/>' alt="">
 	</div>
 	<section class="main-listing">
+
 		<div class="container">
 			<!-- Favorite Icon -->
 			<img id="favoriteIco" onclick="menuDisplay()"
 			alt="FAVORITE"
 			src='<c:url value="/resources/img/favoriteIcon.png"/>'>
-			
-			
-			
-				<div class="row">
-					<div class="col-md-12">
-						<div id="loadNewButton" class="cd-timeline-block load-more-block"
-							style="margin-bottom: 100px">
-							<div class="cd-timeline-year">
-								<h2>
-									<a href="javascript:;" onclick="getNext()"><c:out
-											value="Refresh"></c:out></a>
-	
-								</h2>
+		
+			<div class="row">
+
+
+
+				<div class="col-md-12">
+					<div id="loadNewButton" class="cd-timeline-block load-more-block"
+						style="margin-bottom: 100px">
+						<div class="cd-timeline-year">
+							<h2>
+								<a href="javascript:;" onclick="getNext()"><c:out
+										value="Refresh"></c:out></a>
+
+							</h2>
+						</div>
+						<!-- cd-timeline-img -->
+					</div>
+
+
+					<section id="cd-timeline" class="cd-container">
+
+
+
+
+						<!-- cd-timeline-block -->
+
+
+						<c:forEach var="item" items="${items}" varStatus="counter">
+							<c:if test="${counter.count%2==0 }">
+								<div id="post-1"
+									class="post-40 post type-post status-publish format-status has-post-thumbnail hentry category-status tag-status-2 tag-twitter cd-timeline-block even"
+									style="min-height: 250px">
+							</c:if>
+							<c:if test="${counter.count%2!=0 }">
+								<div id="post-1"
+									class="post-40 post type-post status-publish format-status has-post-thumbnail hentry category-status tag-status-2 tag-twitter cd-timeline-block"
+									style="min-height: 250px">
+							</c:if>
+
+							<div class="cd-timeline-img">
+								<h2 style="padding-top: 8px">${fn:substring(item.addDate, 10, 16)}</h2>
 							</div>
 							<!-- cd-timeline-img -->
-						</div>
-					
-						<section id="cd-timeline" class="cd-container">
-						<!-- cd-timeline-block -->
-							<c:forEach var="item" items="${items}" varStatus="counter">
-								<c:if test="${counter.count%2==0 }">
-										<div id="post-1"
-											class="post-40 post type-post status-publish format-status has-post-thumbnail hentry category-status tag-status-2 tag-twitter cd-timeline-block even"
-											style="min-height: 250px"></div>
-								</c:if>
-								<c:if test="${counter.count%2!=0 }">
-									<div id="post-1"
-										class="post-40 post type-post status-publish format-status has-post-thumbnail hentry category-status tag-status-2 tag-twitter cd-timeline-block"
-										style="min-height: 250px"></div>
-								</c:if>
-	
-								<div class="cd-timeline-img">
-									<h2 style="padding-top: 8px">${fn:substring(item.addDate, 10, 16)}</h2>
-								</div>
-								<!-- cd-timeline-img -->
-							
-								<div class="cd-timeline-content ">
-									<div class="cd-content clearfix">
-										<div class="content-padding">
-										<span>
-											<a data-toggle="modal" data-target=".bs-example-modal-lg"
-												href="javascript:;" class="post-title"
-												onclick="readMore('${item.link}')"><h2>${item.title }</h2></a>
-											<a class="likeBtn coreSpriteHeartOpen" href="#inline" role="button" onclick="likePress(this)"
-											>Thích</a></span>
-											<div class="post-content">
-												<p>${item.desWithoutImage }</p>
-											</div>
-											<button class="btn btn-primary btn-default cd-read-more"
-												data-toggle="modal" data-target=".bs-example-modal-lg"
-												onclick="readMore('${item.link}')">Read more</button>
-											<div class="clearfix"></div>
-											<div class="cd-author">
-												<img src=${item.smallImage
-													}
-													class="media-object img-responsive" alt=""
-													style="width: 150px" />
-											</div>
+							<div class="cd-timeline-content ">
+								<div class="cd-content clearfix">
+									<div class="content-padding">
+										<a data-toggle="modal" data-target=".bs-example-modal-lg"
+											href="javascript:;" class="post-title"
+											onclick="readMore('${item.link}')"><h2>${item.title }</h2></a>
+
+
+										<div class="post-content">
+											<p>${item.desWithoutImage }</p>
+										</div>
+										<button class="btn btn-primary btn-default cd-read-more"
+											data-toggle="modal" data-target=".bs-example-modal-lg"
+											onclick="readMore('${item.link}')">Read more</button>
+										<div class="clearfix"></div>
+										<div class="cd-author">
+											<img src=${item.smallImage
+												}
+												class="media-object img-responsive" alt=""
+												style="width: 150px" />
 										</div>
 									</div>
 								</div>
-								<!-- cd-timeline-content -->
-							
-								<!-- cd-timeline-block -->
-							</c:forEach>
-	
-	
-							<div id="loadMoreButton" class="cd-timeline-block load-more-block">
-								<div class="cd-timeline-year">
-									<h2>
-										<a href="javascript:;" onclick="getPrevious()"><c:out
-											value="${textLoadMore}"></c:out></a>
-									</h2>
-								</div>
-								<!-- cd-timeline-img -->
 							</div>
-							
-						<!-- cd-timeline-block -->
-						</section>
-					</div>
+							<!-- cd-timeline-content -->
 				</div>
-		</div>
+				<!-- cd-timeline-block -->
+				</c:forEach>
+
+
+				<div id="loadMoreButton" class="cd-timeline-block load-more-block">
+					<div class="cd-timeline-year">
+						<h2>
+							<a href="javascript:;" onclick="getPrevious()"><c:out
+									value="${textLoadMore}"></c:out></a>
+
+						</h2>
+					</div>
+					<!-- cd-timeline-img -->
+				</div>
+				<!-- cd-timeline-block -->
+	</section>
+	</div>
+	</div>
+	</div>
+
+
 	</section>
 
 
@@ -254,6 +252,7 @@
 			</div>
 
 		</div>
+	</div>
 	</div>
 
 	<!-- THIS ARER FOR SELECT CHANNEL -->
@@ -278,7 +277,7 @@
 
 				<div class="row">
 					<!-- Vnexpress_Category -->
-					<div id="categoryBound_vnexpress" class="col-md-4">
+					<div id="categoryBound_vnexpress" class="col-md-4"">
 						<img class="newslogo" alt="Vnexpess"
 							src='<c:url value="/resources/img/logo/logo_vnexpress.jpg"/>'
 							style="margin-left: 20%">
@@ -296,6 +295,7 @@
 										class="[ btn btn-default"> <span
 										class="[ glyphicon glyphicon-ok ]"></span> <span>&nbsp;</span>
 									</label> <label style="border-radius: 0px 0px 0px 5px; width: 60%;"
+										"
 										for="fancy-checkbox-${cateItem.cookie}-vnexpress"
 										class="[ btn btn-default active ]">
 										${cateItem.displayName}</label>
@@ -304,7 +304,7 @@
 
 						</c:forEach>
 					</div>
-					<!-- Kenh14_Category -->
+					<!-- Vnexpress_Category -->
 					<div id="categoryBound_kenh14" class="col-md-4">
 						<!-- Kenh14_Category -->
 						<img class="newslogo" alt="Kenh14"
@@ -362,8 +362,10 @@
 				</div>
 				<div id="getFeedBack">
 					<div class="form-group" align="center" style="margin-left: 10%">
-						<p><i>Không tìm thấy trang yêu thích của bạn? Hảy gửi yêu cầu cho
-							chúng tôi</i></p>
+						<p>
+							<i>Không tìm thấy trang yêu thích của bạn? Hảy gửi yêu cầu
+								cho chúng tôi</i>
+						</p>
 
 						<input type="text" class="form-control" id="feedBackContent"
 							style="width: 70%; float: left;"> <input type="button"
@@ -375,7 +377,14 @@
 
 		</div>
 	</div>
-	
+	</div>
+
+
+
+
+
+
+
 	<script>
 		function getNext() {
 			jQuery.ajax({
@@ -388,6 +397,7 @@
 					if (data.length === 0) {
 						return;
 					}
+					console.log("Get next. Result = " + data.length);
 					addItemsToHead(data);
 				},
 				error : function(data) {
@@ -408,6 +418,7 @@
 					if (data.length === 0) {
 						return;
 					}
+					console.log("Get previous. Result = " + data.length);
 					addItemsToTail(data);
 				},
 				error : function(data) {
@@ -420,7 +431,7 @@
 			for (var i = 0; i < newItems.length; i++) {
 				addOneItemToHead(newItems[i], i);
 			}
-			nextPoint = newItem[0].seourl;
+			nextPoint = newItems[0].seourl;
 		}
 
 		function hideModal() {
@@ -439,23 +450,59 @@
 			console.log("ViewDetails");
 			var url = "${dtItemLink}";
 			handleDetailItem(url);
-			
-			window.onscroll = function(ev)
-			{
+
+			window.onscroll = function(ev) {
 				var B = document.body; //IE 'quirks'
-			    var D = document.documentElement; //IE with doctype
-			    var h = $(window).height();
-			    D= (D.clientHeight)? D: B;
-				
+				var D = document.documentElement; //IE with doctype
+				var h = $(window).height();
+				D = (D.clientHeight) ? D : B;
+
 				if (D.scrollTop == 0) {
 					getNext();
-				}        
+				}
 				if (D.scrollHeight - D.scrollTop == h) {
 					getPrevious();
 				}
 			};
 		});
+
+		function displayNotification() {
+		
+			 $.notify({
+				icon: '/timeline/resources/img/favicon.png',
+				title: 'Có 1 tin mới',
+				message: 'Ảnh chính thức Sony Xperia Z5',
+				url: "/timeline/item/anh-chinh-thuc-sony-xperia-z5"
+			},{
+				type: 'minimalist',
+				delay: 5000,
+				icon_type: 'image',
+				template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+					'<img data-notify="icon" class="img-circle pull-left" style ="max-width:40px; max-height:40px">' +
+					'<span data-notify="title">{1}</span>' +
+					'<span data-notify="message">{2}</span>' +
+					'<a href="{3}" target="_self" data-notify="url"></a>' +
+				'</div>',
+			}); 
+			/* 
+			var notify = $.notify({
+				title: 'Có 1 tin mới</br>',
+				message : 'Ảnh chính thức Sony Xperia Z5'
+			}, {
+				type : 'success',
+				allow_dismiss : false,
+			}); */
+			/* $.notify({
+				title: "Có 1 tin mới",
+				message: "Check out my twitter account by clicking on this notification!",
+				url: "https://twitter.com/Mouse0270",
+				icon: "/timeline/resources/img/logo/logo_vnexpress.jpg",
+			},{
+				icon_type: 'image',
+				animate: {
+					enter: 'animated fadeInRight',
+					exit: 'animated fadeOutRight'
+				}
+			}); */
+		}
 	</script>
-	</div>
-	</body>
-	</html>
