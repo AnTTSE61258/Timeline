@@ -191,11 +191,12 @@
 								<div class="cd-timeline-content ">
 									<div class="cd-content clearfix">
 										<div class="content-padding">
+										<span>
 											<a data-toggle="modal" data-target=".bs-example-modal-lg"
 												href="javascript:;" class="post-title"
 												onclick="readMore('${item.link}')"><h2>${item.title }</h2></a>
-	
-											<a class="likeBtn coreSpriteHeartOpen" href="#inline" role="button" onclick="likePress(this)">Thích</a>
+											<a class="likeBtn coreSpriteHeartOpen" href="#inline" role="button" onclick="likePress(this)"
+											>Thích</a></span>
 											<div class="post-content">
 												<p>${item.desWithoutImage }</p>
 											</div>
