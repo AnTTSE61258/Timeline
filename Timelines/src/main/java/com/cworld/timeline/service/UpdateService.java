@@ -12,6 +12,7 @@ import javax.swing.Timer;
 
 import org.jdom2.JDOMException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.feed.RssChannelHttpMessageConverter;
 
 import com.cworld.timeline.category.SLIMCategory;
 import com.cworld.timeline.core.DTGItem;
@@ -29,14 +30,41 @@ public class UpdateService {
 	MGContentManager contentManager;
 	public boolean isRunning;
 	private DTGRssReader dtgRssReader;
+	private Timer getRssTimer;
+	private Timer generateCacheTimer;
 
 	public UpdateService() {
 		System.out.println("Update Service is created");
 		isRunning = false;
 	}
 
+	public TimerStatus getTimerStatus(String timerName) {
+		TimerStatus timerStatus = null;
+		switch (timerName) {
+		case SLIM.TIMER_NAME_GET_RSS:
+			if (getRssTimer == null) {
+				return null;
+			}
+			timerStatus = new TimerStatus(SLIM.TIMER_NAME_GET_RSS, getRssTimer.isRunning(), getRssTimer.isCoalesce(),
+					getRssTimer.isRepeats());
+			break;
+
+		case SLIM.TIMER_NAME_GENERATE_CACHE:
+			if (generateCacheTimer == null) {
+				return null;
+			}
+			timerStatus = new TimerStatus(SLIM.TIMER_NAME_GENERATE_CACHE, generateCacheTimer.isRunning(), generateCacheTimer.isCoalesce(),
+					generateCacheTimer.isRepeats());
+			break;
+		default:
+			break;
+		}
+		return timerStatus;
+
+	}
+
 	public void startService() {
-		Timer timer = new Timer(60 * 1000, new ActionListener() {
+		getRssTimer = new Timer(60 * 1000, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -46,14 +74,14 @@ public class UpdateService {
 				getAndSave(SLIM.CHANNEL_DANTRI);
 			}
 		});
-		timer.setRepeats(true);
-		timer.start();
+		getRssTimer.setRepeats(true);
+		getRssTimer.start();
 		System.out.println("Update service is started at: " + new Date().toLocaleString());
 
 	}
 
 	public void startUpdateCacheListService() {
-		javax.swing.Timer timera = new javax.swing.Timer(60 * 1000, new ActionListener() {
+		generateCacheTimer = new javax.swing.Timer(60 * 1000, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -63,11 +91,21 @@ public class UpdateService {
 			}
 
 		});
-		timera.setRepeats(true);
-		timera.start();
+		generateCacheTimer.setRepeats(true);
+		generateCacheTimer.start();
 		System.out.println("Update cache service is started");
 	}
 
+	public void stopAll(){
+		if (getRssTimer!=null) {
+			getRssTimer.stop();
+		}
+		if (generateCacheTimer!=null) {
+			generateCacheTimer.stop();
+		}
+		
+	}
+	
 	public class GetAndSaveAsyncTask implements Runnable {
 		private String link;
 		private String channel;
@@ -182,7 +220,7 @@ public class UpdateService {
 			getAndSaveOneTarget(SLIM.KENH14_HOCDUONG, SLIM.CHANNEL_KENH14, SLIMCategory.kenh14_HocDuong.getCookie());
 
 			break;
-			
+
 		case SLIM.CHANNEL_DANTRI:
 			// DANTRI_TRANGCHU
 			getAndSaveOneTarget(SLIM.DANTRI_TRANGCHU, SLIM.CHANNEL_DANTRI, SLIMCategory.dantri_TrangChu.getCookie());

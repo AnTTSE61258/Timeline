@@ -102,6 +102,58 @@ public class MGContentManager {
 
 	}
 
+	
+	public List<Item> getNextItemWithCookie(int numberOfItem, String nextPoint, Cookie[] cookies){
+		String vnexpressChn = null;
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("vnexpress_chn")) {
+					vnexpressChn = CookieUtil.getCookieValue(cookie);
+				}
+			}
+		}
+		if (vnexpressChn == null) {
+			return null;
+		}
+		
+		List<Item> items = new ArrayList<Item>();
+		Item demoItem = new Item();
+		demoItem.setSeourl(nextPoint);
+		System.out.println(nextPoint);
+		int position = currentItems.indexOf(demoItem);
+		if (position < 0) {
+			return null;
+		}
+		if (position - numberOfItem < 0) {
+			numberOfItem = position;
+		}
+		
+		int currentPosition = position - 1;
+		Item item;
+		while (items.size()<numberOfItem && currentPosition>0) {
+			item = currentItems.get(currentPosition);
+			if (item.getChannel() != null && item.getChannel().equals(SLIM.CHANNEL_VNEXPRESS)) {
+				if (item.getCategory() != null && vnexpressChn.contains(item.getCategory())) {
+					items.add(item);
+				}
+			}
+
+			if (item.getChannel() != null && item.getChannel().equals(SLIM.CHANNEL_KENH14)) {
+				if (item.getCategory() != null && vnexpressChn.contains(item.getCategory())) {
+					items.add(item);
+				}
+			}
+
+			if (item.getChannel() != null && item.getChannel().equals(SLIM.CHANNEL_DANTRI)) {
+				if (item.getCategory() != null && vnexpressChn.contains(item.getCategory())) {
+					items.add(item);
+				}
+			}
+			currentPosition--;
+		}
+		return items;
+	}
+	
 	public List<Item> getPreviousItemWithCookie(int numberOfItem, String previousPoint, Cookie[] cookies) {
 		String vnexpressChn = null;
 		if (cookies != null) {
@@ -129,6 +181,7 @@ public class MGContentManager {
 		int currentPosition = position;
 		Item item;
 		while (items.size()<numberOfItem && currentPosition < currentItems.size()) {// 5_9 fix issue getPreviousItems
+
 			item = currentItems.get(currentPosition);
 			if (item.getChannel() != null && item.getChannel().equals(SLIM.CHANNEL_VNEXPRESS)) {
 				if (item.getCategory() != null && vnexpressChn.contains(item.getCategory())) {
