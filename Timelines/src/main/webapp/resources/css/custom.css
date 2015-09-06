@@ -63,3 +63,12 @@
 	max-height: 75px;
 	
 }
+
+#favoriteIco
+{
+	position: fixed;
+	z-index: 999;
+	height: 10vh;
+	width: 10vh;
+	cursor: pointer;
+}

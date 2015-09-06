@@ -27,8 +27,10 @@
 	media='all' />
 <link rel='stylesheet' href='<c:url value="/resources/css/style.css"/>'
 	type='text/css' media='all' />
-
-
+<link rel='stylesheet' href='<c:url value="/resources/css/jquery.mmenu.all.css"/>'
+	type='text/css' media='all' />
+<link rel='stylesheet' href='<c:url value="/resources/css/menu.css"/>'
+	type='text/css' media='all' />
 
 <!-- JS -->
 <script type='text/javascript'
@@ -58,6 +60,12 @@
 <script type="text/javascript"
 	src='<c:url value="/resources/js/jquery.cookie.js"/>'></script>
 
+<%-- <script type="text/javascript"
+	src='<c:url value="/resources/js/jquery.mmenu.min.all.js"/>'></script> --%>
+
+<script type="text/javascript"
+	src='<c:url value="/resources/js/new-menu.js"/>'></script>
+
 </head>
 <body class="home blog">
 
@@ -72,6 +80,10 @@
 
 	<script>
 		jQuery(document).ready(function() {
+			$("#mmenu").mmenu({
+				searchfield: true
+			});
+			
 			previousPoint = "${items[fn:length(items)-1].seourl }";
 			nextPoint = "${items[0].seourl}";
 			$('#mainModal').on('shown.bs.modal', function() {
@@ -88,101 +100,139 @@
 			})
 		});
 	</script>
-
-
-
+	
+	<script>
+		function likePress(btn){
+			var name = btn.className;
+			if (name.indexOf("coreSpriteHeartOpen") != -1) {
+				btn.className = "likeBtn coreSpriteHeartFull";
+			} else {
+				btn.className = "likeBtn coreSpriteHeartOpen";
+			}
+		}
+		
+		function menuDisplay(){
+			var menuAPI = $("#mmenu").data( "mmenu" );
+			menuAPI.open();
+		}
+	</script>
+	
+	
+	
+	
+	
+	<!-- Sidebar section -->
+	<!-- <nav id="my-menu">
+		<ul id="menu-side-menu" >
+			<li><a href="#inline">Home</a></li>
+			<li><a href="#inline">Favorites</a></li>
+		</ul>
+	</nav> -->
+	
+	<nav id="mmenu" class="menu-side-menu-container mm-menu mm-horizontal mm-slide mm-offcanvas" style="visibility: visible;">
+		<ul id="menu-side-menu" class="nav mm-list mm-panel mm-opened mm-current">
+			<li class="menu-item menu-item-type-custom menu-item-object-custom "><a href="#inline">Home</a></li>
+			<li class="parent-item menu-item menu-item-type-custom menu-item-object-custom mm-selected"><a href="#inline">Favorites</a></li>
+			<!-- <li class="sub-item menu-item menu-item-type-custom menu-item-object-custom"><a href="#inline">Favorites</a></li> -->
+			<li class="sub-item menu-item menu-item-type-custom menu-item-object-custom"><a href="#inline">Item 1</a></li>
+			<li class="sub-item menu-item menu-item-type-custom menu-item-object-custom"><a href="#inline">Item 2</a></li>
+		</ul>
+	</nav>
+	
+	
+	<div id="page" class="mmenu-page mm-page" style="">
 	<div class="">
+	
 		<img id="background" class="main-listing-bg"
 			src='<c:url value="/resources/img/background.jpg"/>' alt="">
 	</div>
 	<section class="main-listing">
 		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div id="loadNewButton" class="cd-timeline-block load-more-block"
-						style="margin-bottom: 100px">
-						<div class="cd-timeline-year">
-							<h2>
-								<a href="javascript:;" onclick="getNext()"><c:out
-										value="Refresh"></c:out></a>
-
-							</h2>
-						</div>
-						<!-- cd-timeline-img -->
-					</div>
-
-
-					<section id="cd-timeline" class="cd-container">
-
-
-
-
-						<!-- cd-timeline-block -->
-
-
-						<c:forEach var="item" items="${items}" varStatus="counter">
-							<c:if test="${counter.count%2==0 }">
-								<div id="post-1"
-									class="post-40 post type-post status-publish format-status has-post-thumbnail hentry category-status tag-status-2 tag-twitter cd-timeline-block even"
-									style="min-height: 250px">
-							</c:if>
-							<c:if test="${counter.count%2!=0 }">
-								<div id="post-1"
-									class="post-40 post type-post status-publish format-status has-post-thumbnail hentry category-status tag-status-2 tag-twitter cd-timeline-block"
-									style="min-height: 250px">
-							</c:if>
-
-							<div class="cd-timeline-img">
-								<h2 style="padding-top: 8px">${fn:substring(item.addDate, 10, 16)}</h2>
+			<!-- Favorite Icon -->
+			<img id="favoriteIco" onclick="menuDisplay()"
+			alt="FAVORITE"
+			src='<c:url value="/resources/img/favoriteIcon.png"/>'>
+			
+			
+			
+				<div class="row">
+					<div class="col-md-12">
+						<div id="loadNewButton" class="cd-timeline-block load-more-block"
+							style="margin-bottom: 100px">
+							<div class="cd-timeline-year">
+								<h2>
+									<a href="javascript:;" onclick="getNext()"><c:out
+											value="Refresh"></c:out></a>
+	
+								</h2>
 							</div>
 							<!-- cd-timeline-img -->
-							<div class="cd-timeline-content ">
-								<div class="cd-content clearfix">
-									<div class="content-padding">
-										<a data-toggle="modal" data-target=".bs-example-modal-lg"
-											href="javascript:;" class="post-title"
-											onclick="readMore('${item.link}')"><h2>${item.title }</h2></a>
-
-
-										<div class="post-content">
-											<p>${item.desWithoutImage }</p>
-										</div>
-										<button class="btn btn-primary btn-default cd-read-more"
-											data-toggle="modal" data-target=".bs-example-modal-lg"
-											onclick="readMore('${item.link}')">Read more</button>
-										<div class="clearfix"></div>
-										<div class="cd-author">
-											<img src=${item.smallImage
-												}
-												class="media-object img-responsive" alt=""
-												style="width: 150px" />
+						</div>
+					
+						<section id="cd-timeline" class="cd-container">
+						<!-- cd-timeline-block -->
+							<c:forEach var="item" items="${items}" varStatus="counter">
+								<c:if test="${counter.count%2==0 }">
+										<div id="post-1"
+											class="post-40 post type-post status-publish format-status has-post-thumbnail hentry category-status tag-status-2 tag-twitter cd-timeline-block even"
+											style="min-height: 250px"></div>
+								</c:if>
+								<c:if test="${counter.count%2!=0 }">
+									<div id="post-1"
+										class="post-40 post type-post status-publish format-status has-post-thumbnail hentry category-status tag-status-2 tag-twitter cd-timeline-block"
+										style="min-height: 250px"></div>
+								</c:if>
+	
+								<div class="cd-timeline-img">
+									<h2 style="padding-top: 8px">${fn:substring(item.addDate, 10, 16)}</h2>
+								</div>
+								<!-- cd-timeline-img -->
+							
+								<div class="cd-timeline-content ">
+									<div class="cd-content clearfix">
+										<div class="content-padding">
+											<a data-toggle="modal" data-target=".bs-example-modal-lg"
+												href="javascript:;" class="post-title"
+												onclick="readMore('${item.link}')"><h2>${item.title }</h2></a>
+	
+											<a class="likeBtn coreSpriteHeartOpen" href="#inline" role="button" onclick="likePress(this)">Thích</a>
+											<div class="post-content">
+												<p>${item.desWithoutImage }</p>
+											</div>
+											<button class="btn btn-primary btn-default cd-read-more"
+												data-toggle="modal" data-target=".bs-example-modal-lg"
+												onclick="readMore('${item.link}')">Read more</button>
+											<div class="clearfix"></div>
+											<div class="cd-author">
+												<img src=${item.smallImage
+													}
+													class="media-object img-responsive" alt=""
+													style="width: 150px" />
+											</div>
 										</div>
 									</div>
 								</div>
+								<!-- cd-timeline-content -->
+							
+								<!-- cd-timeline-block -->
+							</c:forEach>
+	
+	
+							<div id="loadMoreButton" class="cd-timeline-block load-more-block">
+								<div class="cd-timeline-year">
+									<h2>
+										<a href="javascript:;" onclick="getPrevious()"><c:out
+											value="${textLoadMore}"></c:out></a>
+									</h2>
+								</div>
+								<!-- cd-timeline-img -->
 							</div>
-							<!-- cd-timeline-content -->
-				</div>
-				<!-- cd-timeline-block -->
-				</c:forEach>
-
-
-				<div id="loadMoreButton" class="cd-timeline-block load-more-block">
-					<div class="cd-timeline-year">
-						<h2>
-							<a href="javascript:;" onclick="getPrevious()"><c:out
-									value="${textLoadMore}"></c:out></a>
-
-						</h2>
+							
+						<!-- cd-timeline-block -->
+						</section>
 					</div>
-					<!-- cd-timeline-img -->
 				</div>
-				<!-- cd-timeline-block -->
-	</section>
-	</div>
-	</div>
-	</div>
-
-
+		</div>
 	</section>
 
 
@@ -245,7 +295,6 @@
 										class="[ btn btn-default"> <span
 										class="[ glyphicon glyphicon-ok ]"></span> <span>&nbsp;</span>
 									</label> <label style="border-radius: 0px 0px 0px 5px; width: 60%;"
-										
 										for="fancy-checkbox-${cateItem.cookie}-vnexpress"
 										class="[ btn btn-default active ]">
 										${cateItem.displayName}</label>
@@ -312,10 +361,8 @@
 				</div>
 				<div id="getFeedBack">
 					<div class="form-group" align="center" style="margin-left: 10%">
-						<p>
-							<i>Không tìm thấy trang yêu thích của bạn? Hảy gửi yêu cầu
-								cho chúng tôi</i>
-						</p>
+						<p><i>Không tìm thấy trang yêu thích của bạn? Hảy gửi yêu cầu cho
+							chúng tôi</i></p>
 
 						<input type="text" class="form-control" id="feedBackContent"
 							style="width: 70%; float: left;"> <input type="button"
@@ -327,9 +374,7 @@
 
 		</div>
 	</div>
-
-
-
+	
 	<script>
 		function getNext() {
 			jQuery.ajax({
@@ -393,21 +438,23 @@
 			console.log("ViewDetails");
 			var url = "${dtItemLink}";
 			handleDetailItem(url);
-
-			window.onscroll = function(ev) {
+			
+			window.onscroll = function(ev)
+			{
 				var B = document.body; //IE 'quirks'
-				var D = document.documentElement; //IE with doctype
-				var h = $(window).height();
-				D = (D.clientHeight) ? D : B;
-
+			    var D = document.documentElement; //IE with doctype
+			    var h = $(window).height();
+			    D= (D.clientHeight)? D: B;
+				
 				if (D.scrollTop == 0) {
 					getNext();
-				}
+				}        
 				if (D.scrollHeight - D.scrollTop == h) {
 					getPrevious();
 				}
 			};
 		});
 	</script>
-</body>
-</html>
+	</div>
+	</body>
+	</html>
