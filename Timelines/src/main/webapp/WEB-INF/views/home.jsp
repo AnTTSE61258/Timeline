@@ -204,7 +204,6 @@
 
 		</div>
 	</div>
-	</div>
 
 	<!-- THIS ARER FOR SELECT CHANNEL -->
 	<img id="selectchn-icon" onclick="selectchnPopupDisplay()"
@@ -228,7 +227,7 @@
 
 				<div class="row">
 					<!-- Vnexpress_Category -->
-					<div id="categoryBound_vnexpress" class="col-md-4"">
+					<div id="categoryBound_vnexpress" class="col-md-4">
 						<img class="newslogo" alt="Vnexpess"
 							src='<c:url value="/resources/img/logo/logo_vnexpress.jpg"/>'
 							style="margin-left: 20%">
@@ -246,7 +245,7 @@
 										class="[ btn btn-default"> <span
 										class="[ glyphicon glyphicon-ok ]"></span> <span>&nbsp;</span>
 									</label> <label style="border-radius: 0px 0px 0px 5px; width: 60%;"
-										"
+										
 										for="fancy-checkbox-${cateItem.cookie}-vnexpress"
 										class="[ btn btn-default active ]">
 										${cateItem.displayName}</label>
@@ -255,7 +254,7 @@
 
 						</c:forEach>
 					</div>
-					<!-- Vnexpress_Category -->
+					<!-- Kenh14_Category -->
 					<div id="categoryBound_kenh14" class="col-md-4">
 						<!-- Kenh14_Category -->
 						<img class="newslogo" alt="Kenh14"
@@ -313,8 +312,10 @@
 				</div>
 				<div id="getFeedBack">
 					<div class="form-group" align="center" style="margin-left: 10%">
-						<p><i>Không tìm thấy trang yêu thích của bạn? Hảy gửi yêu cầu cho
-							chúng tôi</i></p>
+						<p>
+							<i>Không tìm thấy trang yêu thích của bạn? Hảy gửi yêu cầu
+								cho chúng tôi</i>
+						</p>
 
 						<input type="text" class="form-control" id="feedBackContent"
 							style="width: 70%; float: left;"> <input type="button"
@@ -326,11 +327,6 @@
 
 		</div>
 	</div>
-	</div>
-
-
-
-
 
 
 
@@ -397,20 +393,21 @@
 			console.log("ViewDetails");
 			var url = "${dtItemLink}";
 			handleDetailItem(url);
-			
-			window.onscroll = function(ev)
-			{
+
+			window.onscroll = function(ev) {
 				var B = document.body; //IE 'quirks'
-			    var D = document.documentElement; //IE with doctype
-			    var h = $(window).height();
-			    D= (D.clientHeight)? D: B;
-				
+				var D = document.documentElement; //IE with doctype
+				var h = $(window).height();
+				D = (D.clientHeight) ? D : B;
+
 				if (D.scrollTop == 0) {
 					getNext();
-				}        
+				}
 				if (D.scrollHeight - D.scrollTop == h) {
 					getPrevious();
 				}
 			};
 		});
 	</script>
+</body>
+</html>
