@@ -3,6 +3,11 @@ package com.cworld.timeline.core;
 import java.util.ArrayList;
 
 public class SLIM {
+	//TIMER NAME
+	public static final String TIMER_NAME_GET_RSS = "getRssTimer";
+	public static final String TIMER_NAME_GENERATE_CACHE = "generateCacheTimer";
+	
+	
 	// GENERAL
 	public static final String ELEMENT_ITEM = "item";
 	public static final String ITEM_title = "title";

@@ -117,15 +117,27 @@ public class HomeController {
 	public String admin(Locale locale, Model model) {
 		List<Item> items = mgContentManager.getCurrentItems();
 		model.addAttribute("items", items);
+		model.addAttribute("getRssTimer", updateService.getTimerStatus(SLIM.TIMER_NAME_GET_RSS));
+		model.addAttribute("generateTimer", updateService.getTimerStatus(SLIM.TIMER_NAME_GENERATE_CACHE));
 		return "admin";
 	}
 
-	@RequestMapping(value = "admin/admin-refresh", method = RequestMethod.GET)
-	public String adminRefresh(Locale locale, Model model) {
-		List<Item> items = mgContentManager.getCurrentItems();
-		mgContentManager.refreshCurrentItems();
-		model.addAttribute("items", items);
-		return "admin";
+	@RequestMapping(value = "admin/control", method = RequestMethod.POST)
+	public String adminRefresh(Locale locale, Model model, HttpServletRequest request) {
+		String btn = request.getParameter("btnControl");
+		if (btn.equals("START SERVICE")) {
+			System.setProperty("http.agent", USER_AGENT);
+			updateService.startService();
+			updateService.startUpdateCacheListService();
+		}
+		if (btn.equals("STOP SERVICE")) {
+			updateService.stopAll();
+		}
+		if (btn.equals("GENERATE CACHE")) {
+			mgContentManager.refreshCurrentItems();
+		}
+		
+		return "redirect:" + "/admin";
 	}
 
 	@RequestMapping(value = "getTargetResponse", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")

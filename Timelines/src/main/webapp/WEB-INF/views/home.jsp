@@ -27,7 +27,9 @@
 	media='all' />
 <link rel='stylesheet' href='<c:url value="/resources/css/style.css"/>'
 	type='text/css' media='all' />
-
+	
+<link rel='stylesheet' href='<c:url value="/resources/css/animate.css"/>'
+	type='text/css' media='all' />
 
 
 <!-- JS -->
@@ -57,6 +59,9 @@
 
 <script type="text/javascript"
 	src='<c:url value="/resources/js/jquery.cookie.js"/>'></script>
+
+<script type="text/javascript"
+	src='<c:url value="/resources/js/bootstrap-notify.min.js"/>'></script>
 
 </head>
 <body class="home blog">
@@ -96,9 +101,26 @@
 			src='<c:url value="/resources/img/background.jpg"/>' alt="">
 	</div>
 	<section class="main-listing">
+
 		<div class="container">
 			<div class="row">
+
+
+
 				<div class="col-md-12">
+				
+					<div id="displayNotificationTest" class="cd-timeline-block load-more-block"
+						style="margin-bottom: 100px">
+						<div class="cd-timeline-year">
+							<h2>
+								<a href="javascript:;" onclick="displayNotification()"><c:out
+										value="Display notification"></c:out></a>
+
+							</h2>
+						</div>
+						<!-- cd-timeline-img -->
+					</div>
+					
 					<div id="loadNewButton" class="cd-timeline-block load-more-block"
 						style="margin-bottom: 100px">
 						<div class="cd-timeline-year">
@@ -313,8 +335,10 @@
 				</div>
 				<div id="getFeedBack">
 					<div class="form-group" align="center" style="margin-left: 10%">
-						<p><i>Không tìm thấy trang yêu thích của bạn? Hảy gửi yêu cầu cho
-							chúng tôi</i></p>
+						<p>
+							<i>Không tìm thấy trang yêu thích của bạn? Hảy gửi yêu cầu
+								cho chúng tôi</i>
+						</p>
 
 						<input type="text" class="form-control" id="feedBackContent"
 							style="width: 70%; float: left;"> <input type="button"
@@ -346,6 +370,7 @@
 					if (data.length === 0) {
 						return;
 					}
+					console.log("Get next. Result = " + data.length);
 					addItemsToHead(data);
 				},
 				error : function(data) {
@@ -366,6 +391,7 @@
 					if (data.length === 0) {
 						return;
 					}
+					console.log("Get previous. Result = " + data.length);
 					addItemsToTail(data);
 				},
 				error : function(data) {
@@ -378,7 +404,7 @@
 			for (var i = 0; i < newItems.length; i++) {
 				addOneItemToHead(newItems[i], i);
 			}
-			nextPoint = newItem[0].seourl;
+			nextPoint = newItems[0].seourl;
 		}
 
 		function hideModal() {
@@ -397,20 +423,59 @@
 			console.log("ViewDetails");
 			var url = "${dtItemLink}";
 			handleDetailItem(url);
-			
-			window.onscroll = function(ev)
-			{
+
+			window.onscroll = function(ev) {
 				var B = document.body; //IE 'quirks'
-			    var D = document.documentElement; //IE with doctype
-			    var h = $(window).height();
-			    D= (D.clientHeight)? D: B;
-				
+				var D = document.documentElement; //IE with doctype
+				var h = $(window).height();
+				D = (D.clientHeight) ? D : B;
+
 				if (D.scrollTop == 0) {
 					getNext();
-				}        
+				}
 				if (D.scrollHeight - D.scrollTop == h) {
 					getPrevious();
 				}
 			};
 		});
+
+		function displayNotification() {
+		
+			 $.notify({
+				icon: '/timeline/resources/img/favicon.png',
+				title: 'Có 1 tin mới',
+				message: 'Ảnh chính thức Sony Xperia Z5',
+				url: "/timeline/item/anh-chinh-thuc-sony-xperia-z5"
+			},{
+				type: 'minimalist',
+				delay: 5000,
+				icon_type: 'image',
+				template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+					'<img data-notify="icon" class="img-circle pull-left" style ="max-width:40px; max-height:40px">' +
+					'<span data-notify="title">{1}</span>' +
+					'<span data-notify="message">{2}</span>' +
+					'<a href="{3}" target="_self" data-notify="url"></a>' +
+				'</div>',
+			}); 
+			/* 
+			var notify = $.notify({
+				title: 'Có 1 tin mới</br>',
+				message : 'Ảnh chính thức Sony Xperia Z5'
+			}, {
+				type : 'success',
+				allow_dismiss : false,
+			}); */
+			/* $.notify({
+				title: "Có 1 tin mới",
+				message: "Check out my twitter account by clicking on this notification!",
+				url: "https://twitter.com/Mouse0270",
+				icon: "/timeline/resources/img/logo/logo_vnexpress.jpg",
+			},{
+				icon_type: 'image',
+				animate: {
+					enter: 'animated fadeInRight',
+					exit: 'animated fadeOutRight'
+				}
+			}); */
+		}
 	</script>
