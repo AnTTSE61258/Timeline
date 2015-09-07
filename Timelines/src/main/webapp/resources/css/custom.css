@@ -115,7 +115,10 @@
 {
 	position: fixed;
 	z-index: 999;
-	height: 10vh;
-	width: 10vh;
+	height: 6vh;
+	width: 6vh;
 	cursor: pointer;
+	opacity: 0.8;
+	margin-left: 1vh;
+	margin-top: 1vh;
 }

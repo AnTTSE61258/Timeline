@@ -67,6 +67,8 @@
 <script type="text/javascript"
 	src='<c:url value="/resources/js/new-menu.js"/>'></script>
 
+<script type="text/javascript"
+	src='<c:url value="/resources/js/favorite.js"/>'></script>
 </head>
 <body class="home blog">
 
@@ -121,7 +123,7 @@
 	<nav id="mmenu" class="menu-side-menu-container mm-menu mm-horizontal mm-slide mm-offcanvas" style="visibility: visible;">
 		<ul id="menu-side-menu" class="nav mm-list mm-panel mm-opened mm-current">
 			<li class="menu-item menu-item-type-custom menu-item-object-custom "><a href="#inline">Home</a></li>
-			<li class="parent-item menu-item menu-item-type-custom menu-item-object-custom mm-selected"><a href="#inline">Favorites</a></li>
+			<li class="parent-item menu-item menu-item-type-custom menu-item-object-custom mm-selected"><a href="#inline" style="font-size: 15px;">Các tin đã dánh dấu</a></li>
 			<!-- <li class="sub-item menu-item menu-item-type-custom menu-item-object-custom"><a href="#inline">Favorites</a></li> -->
 			<li class="sub-item menu-item menu-item-type-custom menu-item-object-custom"><a href="#inline">Item 1</a></li>
 			<li class="sub-item menu-item menu-item-type-custom menu-item-object-custom"><a href="#inline">Item 2</a></li>
@@ -135,13 +137,14 @@
 		<img id="background" class="main-listing-bg"
 			src='<c:url value="/resources/img/background.jpg"/>' alt="">
 	</div>
+	<img id="favoriteIco" onclick="menuDisplay()"
+			alt="FAVORITE"
+			src='<c:url value="/resources/img/hIcon.png"/>'>
 	<section class="main-listing">
 
 		<div class="container">
 			<!-- Favorite Icon -->
-			<img id="favoriteIco" onclick="menuDisplay()"
-			alt="FAVORITE"
-			src='<c:url value="/resources/img/favoriteIcon.png"/>'>
+			
 		
 			<div class="row">
 
