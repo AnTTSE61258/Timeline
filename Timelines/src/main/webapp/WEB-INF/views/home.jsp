@@ -135,13 +135,14 @@
 		<img id="background" class="main-listing-bg"
 			src='<c:url value="/resources/img/background.jpg"/>' alt="">
 	</div>
-	<section class="main-listing">
-
-		<div class="container">
-			<!-- Favorite Icon -->
+	<!-- Favorite Icon -->
 			<img id="favoriteIco" onclick="menuDisplay()"
 			alt="FAVORITE"
 			src='<c:url value="/resources/img/favoriteIcon.png"/>'>
+	<section class="main-listing">
+
+		<div class="container">
+			
 		
 			<div class="row">
 
@@ -188,11 +189,17 @@
 							<div class="cd-timeline-content ">
 								<div class="cd-content clearfix">
 									<div class="content-padding">
+									<div class="row">
+									<div class="col-md-10" style="padding-right: 0px;">
 										<a data-toggle="modal" data-target=".bs-example-modal-lg"
 											href="javascript:;" class="post-title"
 											onclick="readMore('${item.link}')"><h2>${item.title }</h2></a>
-
-
+									</div>
+									<div class="col-md-2">
+										<a class="likeBtn coreSpriteHeartOpen" href="#inline" role="button" onclick="likePress(this)"
+											></a>
+									</div>
+									</div>
 										<div class="post-content">
 											<p>${item.desWithoutImage }</p>
 										</div>

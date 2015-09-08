@@ -65,50 +65,36 @@
 }
 
 .coreSpriteHeartFull {
-  
+  display:inline;
   background-image: url(https://instagramstatic-a.akamaihd.net/bluebar/857185b/cache/sprites/core-sprites-175663.png);
-  
   background-repeat: no-repeat;
-  
   background-position: -386px -268px;
-  
   height: 44px;
-  
   width: 44px;
-  
 }
 
 .coreSpriteHeartOpen {
-  
+  display:inline;
   background-image: url(https://instagramstatic-a.akamaihd.net/bluebar/857185b/cache/sprites/core-sprites-175663.png);
-  
   background-repeat: no-repeat;
-  
   background-position: -392px -92px;
-  
   height: 44px;
-  
   width: 44px;
-  
 }
 
 .coreSpriteHeartSmall {
-  
   background-image: url(https://instagramstatic-a.akamaihd.net/bluebar/857185b/cache/sprites/core-sprites-175663.png);
-  
   background-repeat: no-repeat;
-  
   background-position: -119px -397px;
-  
   height: 19px;
-  
   width: 19px;
   
 }
 
 .likeBtn
 {
-    display:block;overflow:hidden;text-indent:110%;white-space:nowrap
+    display:block;overflow:hidden;/*text-indent:110%;white-space:nowrap */
+    cursor: pointer;
 }
 
 #favoriteIco
@@ -118,4 +104,6 @@
 	height: 10vh;
 	width: 10vh;
 	cursor: pointer;
+	margin-left: 20px;
+	margin-top: 10px;
 }

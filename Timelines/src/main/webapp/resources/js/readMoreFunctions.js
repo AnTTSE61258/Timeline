@@ -21,7 +21,7 @@ function getResponseFromUrl(url) {
 				return;
 			}
 			document.getElementById("modalContent").innerHTML = data;
-			$("#modalContent h1").after('<a class="likeBtn coreSpriteHeartOpen" role="button" href="#inline" onclick="likePress(this)">Thích</a>');
+			$("#modalContent h1").after('<a class="likeBtn coreSpriteHeartOpen" role="button" href="#inline" onclick="likePress(this)"></a>');
 			return data;
 		},
 		error : function(data) {
