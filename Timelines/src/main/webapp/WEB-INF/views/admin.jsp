@@ -13,6 +13,7 @@
 <body>
 	<c:set var="rssTimer" value="${getRssTimer}"></c:set>
 	<c:set var="generateTimer" value="${generateTimer}"></c:set>
+	
 	${rssTimer.timerName }
 
 
@@ -46,7 +47,7 @@
 		</tbody>
 	</table>
 	<div>
-		<form action="/timeline/admin/control" method="POST">
+		<form action="<c:url value="/admin/control"/>" method="POST">
 			<input name="btnControl" type="submit" value="START SERVICE" /> <input
 				name="btnControl" type="submit" value="STOP SERVICE" /> <input
 				name="btnControl" type="submit" value="GENERATE CACHE" />

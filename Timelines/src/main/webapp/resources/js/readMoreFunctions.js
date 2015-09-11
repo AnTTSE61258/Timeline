@@ -12,7 +12,7 @@ function readMore(url) {
 function getResponseFromUrl(url) {
 	jQuery.ajax({
 		type : "GET",
-		url : "/timeline/getTargetResponse",
+		url : "getTargetResponse",
 		data : {
 			url : url
 		},

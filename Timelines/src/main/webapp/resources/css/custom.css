@@ -30,6 +30,17 @@
 	height: 15vh;
 	width: 15vh;
 }
+#underConstructor{
+	position: fixed;
+	bottom: 0px;
+	right: 0px;
+	z-index: 999;
+	height: 5vh;
+	width: 100%;
+	background-color: blue;
+	text-align: center;
+	
+}
 
 
 .form-group input[type="checkbox"] {
