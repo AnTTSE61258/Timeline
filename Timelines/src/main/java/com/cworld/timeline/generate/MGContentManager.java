@@ -128,9 +128,9 @@ public class MGContentManager {
 			numberOfItem = position;
 		}
 		
-		int currentPosition = position - 1;
+		int currentPosition = 0;
 		Item item;
-		while (items.size()<numberOfItem && currentPosition>0) {
+		while (items.size()<numberOfItem && currentPosition<position) {
 			item = currentItems.get(currentPosition);
 			if (item.getChannel() != null && item.getChannel().equals(SLIM.CHANNEL_VNEXPRESS)) {
 				if (item.getCategory() != null && vnexpressChn.contains(item.getCategory())) {
@@ -149,7 +149,7 @@ public class MGContentManager {
 					items.add(item);
 				}
 			}
-			currentPosition--;
+			currentPosition++;
 		}
 		return items;
 	}

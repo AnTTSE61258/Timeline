@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -107,9 +108,10 @@ public class HomeController {
 
 	@RequestMapping(value = "/getNext", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Item> getNextItems(Locale locale, Model model, @RequestParam String nextPoint) {
+	public List<Item> getNextItems(Locale locale, Model model, @RequestParam String nextPoint,HttpServletRequest request) {
 		System.out.println("GET NEXT FROM: " + nextPoint + ";");
-		List<Item> nextItems = mgContentManager.getNextItem(9, nextPoint);
+		Cookie[] cookies = request.getCookies();
+		List<Item> nextItems = mgContentManager.getNextItemWithCookie(10, nextPoint, cookies);
 		return nextItems;
 	}
 
