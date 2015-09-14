@@ -35,14 +35,14 @@ public class ViewDetailController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/item/{seourl}", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
-	public String home(Locale locale, Model model, @PathVariable("seourl") String seourl) {
-		System.out.println("ViewDetails" + seourl);
-		Item targetItem = itemDAO.findItemBySeourl(seourl);
-		model.addAttribute("detailItem", targetItem);
-		List<Item> items = mgContentManager.getFirstItem(20);
-		model.addAttribute("items", items);
-		return "home";
-	}
+//	@RequestMapping(value = "/item/{seourl}", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
+//	public String home(Locale locale, Model model, @PathVariable("seourl") String seourl) {
+//		System.out.println("ViewDetails" + seourl);
+//		Item targetItem = itemDAO.findItemBySeourl(seourl);
+//		model.addAttribute("detailItem", targetItem);
+//		List<Item> items = mgContentManager.getFirstItem(20);
+//		model.addAttribute("items", items);
+//		return "home";
+//	}
 
 }

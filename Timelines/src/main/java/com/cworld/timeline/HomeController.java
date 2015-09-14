@@ -67,6 +67,13 @@ public class HomeController {
 		List<Item> items = mgContentManager.getFirstItemWithCookie(20, cookies);
 		model.addAttribute("items", items);
 		MGContentManager.addCategoryToModel(model);
+		//Check item parameter
+		String item = request.getParameter("item");
+		if (item!=null) {
+			System.out.println("View detail: " + item);
+			Item targetItem = itemDAO.findItemBySeourl(item);
+			model.addAttribute("detailItem", targetItem);
+		}
 		return "home";
 	}
 

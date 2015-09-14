@@ -388,7 +388,7 @@
 					addItemsToHead(data);
 				},
 				error : function(data) {
-					alert("getNextFail: " +data)
+					console.log("getNextFail: " +data)
 				}
 			});
 		}
@@ -408,7 +408,7 @@
 					addItemsToTail(data);
 				},
 				error : function(data) {
-					alert(data)
+					console.log("Get previous Error: " + data);
 				}
 			});
 		}
