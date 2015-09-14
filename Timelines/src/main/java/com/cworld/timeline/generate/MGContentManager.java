@@ -180,7 +180,8 @@ public class MGContentManager {
 		System.out.println(position);
 		int currentPosition = position;
 		Item item;
-		while (items.size()<numberOfItem && currentPosition < currentItems.size()) {
+		while (items.size()<numberOfItem && currentPosition < currentItems.size()) {// 5_9 fix issue getPreviousItems
+
 			item = currentItems.get(currentPosition);
 			if (item.getChannel() != null && item.getChannel().equals(SLIM.CHANNEL_VNEXPRESS)) {
 				if (item.getCategory() != null && vnexpressChn.contains(item.getCategory())) {
@@ -227,6 +228,18 @@ public class MGContentManager {
 		}
 		return items;
 
+	}
+	
+	public boolean hasNews(String nextPoint) {
+		Item demoItem = new Item();
+		demoItem.setSeourl(nextPoint);
+		System.out.println(nextPoint);
+		int position = currentItems.indexOf(demoItem);
+		if (position <= 0) {
+			return false;
+		}
+		
+		return true;
 	}
 
 	public boolean refreshCurrentItems() {

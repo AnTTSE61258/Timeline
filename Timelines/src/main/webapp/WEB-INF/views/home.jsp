@@ -57,8 +57,27 @@
 <script type="text/javascript"
 	src='<c:url value="/resources/js/selectchn.js"/>'></script>
 
-<script type="text/javascript"
-	src='<c:url value="/resources/js/jquery.cookie.js"/>'></script>
+<script type="text/javascript" 
+	src='<c:url value="/resources/js/jquery.cookie.js"/>'>
+
+</script>	
+
+<style type="text/css">
+#btn-newnews {
+	position: fixed;
+	padding: 5px 10px;	
+	border-radius: 5px;
+	display: table;
+	z-index: 100;
+	color: #000;
+	background: #ffff99;
+	margin: 10px 39%;
+	display: table;
+	box-shadow: 5px 5px 3px #888;
+	cursor: pointer;
+	visibility: collapse;
+}
+</style>	
 
 <script type="text/javascript"
 	src='<c:url value="/resources/js/bootstrap-notify.min.js"/>'></script>
@@ -92,15 +111,13 @@
 				document.body.style.overflow = 'scroll';
 			})
 		});
-	</script>
-
-
-
+	</script>	
+	
 	<div class="">
 		<img id="background" class="main-listing-bg"
 			src='<c:url value="/resources/img/background.jpg"/>' alt="">
 	</div>
-	<section class="main-listing">
+	<section class="main-listing">		
 
 		<div class="container">
 			<div class="row">
@@ -108,13 +125,15 @@
 
 
 				<div class="col-md-12">
+					<div id="btn-newnews" onclick="gotop();">
+						Tin mới <span style="font-size:20px;">&#9757;</span>
+					</div>					
 					<div id="loadNewButton" class="cd-timeline-block load-more-block"
 						style="margin-bottom: 100px">
 						<div class="cd-timeline-year">
 							<h2>
 								<a href="javascript:;" onclick="getNext()"><c:out
 										value="Refresh"></c:out></a>
-
 							</h2>
 						</div>
 						<!-- cd-timeline-img -->
@@ -369,10 +388,9 @@
 					addItemsToHead(data);
 				},
 				error : function(data) {
-					alert(data)
+					alert("getNextFail: " +data)
 				}
 			});
-
 		}
 
 		function getPrevious() {
@@ -413,23 +431,57 @@
 		function showModal() {
 			jQuery("#mainModal").modal('show');
 		}
+		
+		function checknews() {
+			jQuery.ajax({
+				type : "GET",
+				url : "hasNews",
+				data : {
+					nextPoint : nextPoint
+				},
+				success : function(data) {
+					if (!data) {
+						jQuery("#btn-newnews").css("visibility", "collapse");
+						return myNews = setTimeout(function(){checknews();}, 1000*60);
+					}					
+					
+					jQuery("#btn-newnews").css("visibility", "visible");
+				},
+				error : function(data) {
+					jQuery("#btn-newnews").css("visibility", "collapse");
+				}
+			});				
+		}		
+		
+		function gotop() {
+			jQuery('html, body').animate({ scrollTop: 0 }, 'fast');
+			getNext();
+			jQuery("#btn-newnews").css("visibility", "collapse");
+			
+			//window.clearTimeout(myNews);
+			//check has new news or not?
+			myNews = setTimeout(function(){checknews();}, 1000*60);
+		}
+		//check has new news or not?
+		var myNews = setTimeout(function(){checknews();}, 1000*60);
 
 		$(document).ready(function() {
 			console.log("ViewDetails");
 			var url = "${dtItemLink}";
-			handleDetailItem(url);
-
-			window.onscroll = function(ev) {
+			handleDetailItem(url);						
+			
+			window.onscroll = function(ev)
+			{
 				var B = document.body; //IE 'quirks'
 				var D = document.documentElement; //IE with doctype
 				var h = $(window).height();
 				D = (D.clientHeight) ? D : B;
-				
 				/*
 				if (D.scrollTop == 0) {
 					getNext();
 				}
 				*/
+
 				if (D.scrollHeight - D.scrollTop == h) {
 					getPrevious();
 				}
