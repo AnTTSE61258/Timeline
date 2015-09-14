@@ -161,10 +161,13 @@
 											onclick="readMore('${item.link}')">Read more</button>
 										<div class="clearfix"></div>
 										<div class="cd-author">
-											<img src=${item.smallImage
-												}
-												class="media-object img-responsive" alt=""
-												style="width: 150px" />
+											<a data-toggle="modal" data-target=".bs-example-modal-lg"
+												href="javascript:;"	onclick="readMore('${item.link}')">
+												<img src=${item.smallImage
+													}
+													class="media-object img-responsive" alt=""
+													style="width: 150px" />
+											</a>													
 										</div>
 									</div>
 								</div>
