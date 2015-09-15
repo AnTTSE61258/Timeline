@@ -35,6 +35,10 @@
 <!-- JS -->
 <script type='text/javascript'
 	src='<c:url value="/resources/js/jquery-2.1.4.min.js" ></c:url>'></script>
+
+<script type='text/javascript'
+	src='<c:url value="/resources/js/jquery.lazyload.min.js" ></c:url>'></script>	
+	
 <script type="text/javascript"
 	src='<c:url value="/resources/js/js-date-format.js"/>'></script>
 
@@ -79,8 +83,8 @@
 }
 </style>	
 
-<script type="text/javascript"
-	src='<c:url value="/resources/js/bootstrap-notify.min.js"/>'></script>
+<%-- <script type="text/javascript"
+	src='<c:url value="/resources/js/bootstrap-notify.min.js"/>'></script> --%>
 
 </head>
 <body class="home blog">
@@ -182,9 +186,7 @@
 										<div class="cd-author">
 											<a data-toggle="modal" data-target=".bs-example-modal-lg"
 												href="javascript:;"	onclick="readMore('${item.link}')">
-												<img src=${item.smallImage
-													}
-													class="media-object img-responsive" alt=""
+												<img class="lazy" data-original=${item.smallImage} alt=""
 													style="width: 150px" />
 											</a>													
 										</div>
@@ -527,4 +529,11 @@
 				}
 			}); */
 		}
+
+		$(function() {
+		    $("img.lazy").lazyload({
+			    skip_invisible : true
+			});
+		});
+	
 	</script>
