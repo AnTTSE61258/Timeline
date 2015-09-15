@@ -63,7 +63,6 @@ public class HomeController {
 			cookies = new Cookie[1];
 			cookies[0] = defaultCookie;
 		}
-
 		List<Item> items = mgContentManager.getFirstItemWithCookie(20, cookies);
 		model.addAttribute("items", items);
 		MGContentManager.addCategoryToModel(model);

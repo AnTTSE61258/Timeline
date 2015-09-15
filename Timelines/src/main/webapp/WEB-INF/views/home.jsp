@@ -1,3 +1,5 @@
+<%@page import="com.cworld.timeline.database.model.Item"%>
+<%@page import="java.util.Date"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page session="false" contentType="text/html; charset=UTF-8"%>
@@ -165,7 +167,11 @@
 							</c:if>
 
 							<div class="cd-timeline-img">
-								<h2 style="padding-top: 8px">${fn:substring(item.addDate, 10, 16)}</h2>
+									<%
+									Item item = (Item) pageContext.getAttribute("item");
+									Date date = item.getAddDate();
+									out.println("<h2 style=\"padding-top: 8px\">"+date.getHours()+":"+date.getMinutes()+"</h2>");
+									%>
 							</div>
 							<!-- cd-timeline-img -->
 							<div class="cd-timeline-content ">
