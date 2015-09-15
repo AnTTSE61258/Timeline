@@ -347,9 +347,40 @@
 							</div>
 						</c:forEach>
 
-						<!-- DanTricategory -->
+						<!-- DanTricategory -->						
+					</div>										
+				</div>
+				<!-- ALL + UNCHECK ALL + RECOMMEND -->
+				<div class="row-utility">				
+					<div class="col-md-4" style="text-align: right;">
+						<label class="btn-utility-checkbox" onclick="checkall();"> 
+							<span class="[ glyphicon glyphicon-ok checkall ]"
+								  style="visibility: hidden;"></span>
+						</label> 
+						<label class="btn-utility-title" onclick="checkall();">
+							Chọn Tất cả
+						</label>
+					</div>
+					<div class="col-md-4" style="text-align: center;">
+						<label class="btn-utility-checkbox" onclick="uncheckall();"> 
+							<span class="[ glyphicon glyphicon-ok uncheckall ]"
+								  style="visibility: hidden;"></span>
+						</label> 
+						<label class="btn-utility-title" onclick="uncheckall();">
+							Bỏ chọn Tất cả
+						</label>
+					</div>
+					<div class="col-md-4" style="text-align: left;">
+						<label class="btn-utility-checkbox" onclick="recommend();"> 
+							<span class="[ glyphicon glyphicon-ok recommend ]"
+								  style="visibility: hidden;"></span>
+						</label> 
+						<label class="btn-utility-title" onclick="recommend();">
+							Gợi ý
+						</label>
 					</div>
 				</div>
+				<!-- ALL + UNCHECK ALL + RECOMMEND -->
 				<div id="getFeedBack">
 					<div class="form-group" align="center" style="margin-left: 10%">
 						<p>
@@ -374,11 +405,6 @@
 		</div>
 		
 	</div>
-
-
-
-
-
 
 	<script>
 		function getNext() {
@@ -495,6 +521,40 @@
 				}
 			};
 		});
+		
+		<!-- ALL + UNCHECK ALL + RECOMMEND -->
+		function checkall() {
+			$('.form-group').each(function() {
+				var checkBoxItem = $(this).children('.checkbox-chn');
+				if (!checkBoxItem.is(":checked")) {
+					$(this).children('.btn-group').children('.active').click();
+				}
+			});
+			
+			$('span.checkall').css("visibility", "visible");
+			$('span.uncheckall').css("visibility", "hidden");
+			$('span.recommend').css("visibility", "hidden");
+		}
+		
+		function uncheckall() {
+			$('.form-group').each(function() {
+				var checkBoxItem = $(this).children('.checkbox-chn');
+				if (checkBoxItem.is(":checked")) {
+					$(this).children('.btn-group').children('.active').click();
+				}
+			});
+			
+			$('span.checkall').css("visibility", "hidden");
+			$('span.uncheckall').css("visibility", "visible");
+			$('span.recommend').css("visibility", "hidden");			
+		}
+		
+		function recommend() {
+			$('span.checkall').css("visibility", "hidden");
+			$('span.uncheckall').css("visibility", "hidden");
+			$('span.recommend').css("visibility", "visible");
+		}
+		<!-- ALL + UNCHECK ALL + RECOMMEND -->
 
 		function displayNotification() {
 		
