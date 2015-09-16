@@ -76,3 +76,12 @@
 	max-height: 75px;
 	
 }
+#secondaryCloseDiv{
+	text-align: center;
+	background-color: #E74C3C;
+	border-radius: 5px;
+	cursor: pointer;
+}
+#closeA{
+	color: black;
+}

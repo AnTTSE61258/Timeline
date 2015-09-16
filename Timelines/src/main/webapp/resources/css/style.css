@@ -273,6 +273,10 @@ table td{
 }
 
 @media only screen and (max-width: 768px) {
+	#iconCloseBound{
+		visibility: hidden;
+	}
+	
 	.cd-timeline-block.year-block{
 		margin: 0px;
 	}	

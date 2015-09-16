@@ -20,6 +20,7 @@ function getResponseFromUrl(url) {
 			if (data === null || data === '') {
 				return;
 			}
+			data += "<div id=\"secondaryCloseDiv\" onclick=\"hideModal()\"><a id=\"closeA\" href=\"javascript:;\">Đóng</a></div>";
 			document.getElementById("modalContent").innerHTML = data;
 			return data;
 		},
