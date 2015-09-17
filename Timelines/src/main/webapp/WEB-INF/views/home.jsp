@@ -65,8 +65,10 @@
 
 <script type="text/javascript" 
 	src='<c:url value="/resources/js/jquery.cookie.js"/>'>
+</script>
 
-</script>	
+<script type="text/javascript"
+	src='<c:url value="/resources/js/sonic.js"/>'></script>	
 
 <style type="text/css">
 #btn-newnews {
@@ -134,12 +136,6 @@
 				<div class="col-md-12">									
 					<div id="loadNewButton" class="cd-timeline-block load-more-block"
 						style="margin-bottom: 100px">
-						<div class="cd-timeline-year">
-							<h2>
-								<a href="javascript:;" onclick="getNext()"><c:out
-										value="Refresh"></c:out></a>
-							</h2>
-						</div>
 						<!-- cd-timeline-img -->
 					</div>
 
@@ -199,7 +195,7 @@
 				<div id="loadMoreButton" class="cd-timeline-block load-more-block">
 					<div class="cd-timeline-year">
 						<h2>
-							<a href="javascript:;" onclick="getPrevious()"><c:out
+							<a href="javascript:;"><c:out
 									value="${textLoadMore}"></c:out></a>
 
 						</h2>
@@ -366,11 +362,6 @@
 		
 	</div>
 
-
-
-
-
-
 	<script>
 		function getNext() {
 			jQuery.ajax({
@@ -391,8 +382,8 @@
 				}
 			});
 		}
-
-		function getPrevious() {
+		
+		function callPreviousAjax(){
 			jQuery.ajax({
 				type : "GET",
 				url : "getPrevious",
@@ -410,6 +401,35 @@
 					console.log("Get previous Error: " + data);
 				}
 			});
+			$(".cd-timeline-year").show();
+			loader.stop();
+		}
+
+		function getPrevious() {
+			var loader = new Sonic({
+				width: 100,
+				height: 100,
+				stepsPerFrame: 1,
+				trailLength: 1,
+				pointDistance: .02,
+				fps: 100,
+				fillColor: '#CB410B',
+				step: function(point, index) {
+					
+					this._.beginPath();
+					this._.moveTo(point.x, point.y);
+					this._.arc(point.x, point.y, index * 7, 0, Math.PI*2, false);
+					this._.closePath();
+					this._.fill();
+				},
+				path: [
+					['arc', 50, 50, 30, 0, 360]
+				]
+			});
+			$(".cd-timeline-year").hide();
+			$("#loadMoreButton").append(loader.canvas);
+			loader.play();
+			setTimeout(callPreviousAjax,1000);
 		}
 
 		function addItemsToHead(newItems) {
@@ -502,6 +522,10 @@
 				if (D.scrollHeight - D.scrollTop == h) {
 					getPrevious();
 				}
+				if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+			        // at bottom
+					setTimeout(getPrevious,500);
+			    }
 			};
 		});
 
@@ -551,4 +575,5 @@
 			});
 		});
 	
+		
 	</script>

@@ -85,3 +85,11 @@
 #closeA{
 	color: black;
 }
+
+.sonic{
+	position: absolute;
+	left: 50%;
+	margin-left: -35px;
+	margin-top: 30px;
+	height: 70px;
+}
