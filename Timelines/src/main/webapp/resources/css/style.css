@@ -273,6 +273,7 @@ table td{
 }
 
 @media only screen and (max-width: 768px) {
+	
 	.cd-timeline-block.year-block{
 		margin: 0px;
 	}	

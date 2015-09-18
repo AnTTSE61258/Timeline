@@ -6,16 +6,15 @@
 }
 
 #icon-close {
-	height: 40px;
-	width: 40px;
-	margin-top: -15px;
-	margin-left: -15px;
 	cursor: pointer;
+	float: right;
+	border-radius: 0px 0px 0px 10px;
 }
 
 #iconCloseBound {
 	position: absolute;
 	z-index: 1;
+	right: 0px;
 }
 
 #modalContent img {
@@ -98,4 +97,13 @@
 	background-color: #E6E6E6;
 	border-color: #ADADAD;
 	cursor: pointer;	
+}
+#secondaryCloseDiv{
+	text-align: center;
+	background-color: #E74C3C;
+	border-radius: 5px;
+	cursor: pointer;
+}
+#closeA{
+	color: black;
 }

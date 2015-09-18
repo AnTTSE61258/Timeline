@@ -1,9 +1,16 @@
 /**
  * 
  */
+
+var host = "/timeline";
 function selectchnPopupDisplay() {
 	jQuery("#selectChannelModal").modal('show');
+	
+}
 
+function switchToSelectChannel(){
+	window.location.href = host + "/selectchannel";
+	
 }
 
 function loadCookieToModal() {
@@ -102,4 +109,8 @@ function getCookie(cname) {
 			return c.substring(name.length, c.length);
 	}
 	return "";
+}
+function selectback(){
+	saveCookie();
+	window.location.href = host;
 }

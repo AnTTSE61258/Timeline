@@ -77,11 +77,12 @@
 	z-index: 100;
 	color: #000;
 	background: #ffff99;
-	margin: 10px 39%;
+	margin-top: 10px;
 	display: table;
 	box-shadow: 5px 5px 3px #888;
 	cursor: pointer;
 	visibility: collapse;
+	text-align: center;
 }
 </style>	
 
@@ -89,7 +90,7 @@
 	src='<c:url value="/resources/js/bootstrap-notify.min.js"/>'></script> --%>
 
 </head>
-<body class="home blog">
+<body class="home blog" onresize="fixwidth();">
 
 
 	<!-- PARAMETERS -->
@@ -125,15 +126,12 @@
 	</div>
 	<section class="main-listing">		
 
-		<div class="container">
+		<div class="container">		
 			<div class="row">
-
-
-
-				<div class="col-md-12">
-					<div id="btn-newnews" onclick="gotop();">
-						Tin mới <span style="font-size:20px;">&#9757;</span>
-					</div>					
+				<div id="btn-newnews" onclick="gotop();">
+					Tin mới <span style="font-size:20px;">&#9757;</span>
+				</div>
+				<div class="col-md-12">									
 					<div id="loadNewButton" class="cd-timeline-block load-more-block"
 						style="margin-bottom: 100px">
 						<div class="cd-timeline-year">
@@ -145,15 +143,8 @@
 						<!-- cd-timeline-img -->
 					</div>
 
-
 					<section id="cd-timeline" class="cd-container">
-
-
-
-
 						<!-- cd-timeline-block -->
-
-
 						<c:forEach var="item" items="${items}" varStatus="counter">
 							<c:if test="${counter.count%2==0 }">
 								<div id="post-1"
@@ -228,16 +219,21 @@
 
 
 	<!-- Main modal -->
-	<div id="mainModal" class="modal fade bs-example-modal-lg"
+	<div id="mainModal" class="modal bs-example-modal-lg"
 		tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-		<div class="modal-dialog modal-lg">
-			<div id="iconCloseBound">
-				<img id="icon-close" alt="Close"
+		<div class="modal-dialog modal-lg" style="width: 100%;margin: 0%">
+			<div id="iconCloseBound" align="right">
+			
+				<button id="icon-close" type="button" class="btn btn-default btn-lg" onclick="hideModal()">
+					<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>Đóng
+				</button>
+			
+				<%-- <img id="icon-close" alt="Close"
 					src='<c:url value="/resources/img/close-icon.png"/>'
-					onclick="hideModal()">
+					onclick="hideModal()"> --%>
 			</div>
 			<div id="modalContent" class="modal-content"
-				style="min-height: 70vh; overflow: auto; max-height: 90vh; padding: 4vh;">
+				style="min-height: 100vh; overflow: auto; max-height: 100vh; padding: 3%;">
 
 			</div>
 
@@ -246,11 +242,9 @@
 	</div>
 
 	<!-- THIS ARER FOR SELECT CHANNEL -->
-	<img id="selectchn-icon" onclick="selectchnPopupDisplay()"
+	<img id="selectchn-icon" onclick="switchToSelectChannel()"
 		alt="SELECT CHANNEL"
 		src='<c:url value="/resources/img/selectchn-icon.png"/>'>
-
-
 
 
 	<!-- Select Channel modal -->
@@ -498,11 +492,29 @@
 		}
 		//check has new news or not?
 		var myNews = setTimeout(function(){checknews();}, 1000*60);
+		
+		function left_btnnewnews(){
+			var row_width = $('.row').width();
+			var btn_width = $('#btn-newnews').width();
+			var int_left = (row_width - btn_width - 100) / 2;
+			var str_left = int_left.toString() + "px";
+			$('#btn-newnews').css("margin-left", str_left);
+		}
+		
+		function fixwidth() {
+			var row_width = $('.row').width();
+			var btn_width = $('#btn-newnews').width();
+			var int_left = (row_width - btn_width) / 2;
+			var str_left = int_left.toString() + "px";
+			$('#btn-newnews').css("margin-left", str_left);
+		}
 
 		$(document).ready(function() {
 			console.log("ViewDetails");
 			var url = "${dtItemLink}";
-			handleDetailItem(url);						
+			handleDetailItem(url);
+			
+			left_btnnewnews();
 			
 			window.onscroll = function(ev)
 			{

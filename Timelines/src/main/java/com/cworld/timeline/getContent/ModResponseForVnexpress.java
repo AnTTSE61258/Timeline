@@ -22,6 +22,14 @@ public class ModResponseForVnexpress {
 	private static String getMainContent(String raw) {
 		Document document = Jsoup.parse(raw);
 		Elements divs = document.select("div#box_details_news");
+		// ticket #17
+		if (divs==null||divs.size()==0) {
+			Elements videoDivs = document.select("div#video_top");
+			for (Element div : videoDivs) {
+				return div.html();
+			}
+		}
+		// ticket #17
 		for (Element div : divs) {
 			return div.html();
 		}
@@ -90,7 +98,6 @@ public class ModResponseForVnexpress {
 			block.remove();
 		}
 		return document.html();
-		
 	}
 	
 }
