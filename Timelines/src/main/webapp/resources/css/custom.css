@@ -6,16 +6,15 @@
 }
 
 #icon-close {
-	height: 40px;
-	width: 40px;
-	margin-top: -15px;
-	margin-left: -15px;
 	cursor: pointer;
+	float: right;
+	border-radius: 0px 0px 0px 10px;
 }
 
 #iconCloseBound {
 	position: absolute;
 	z-index: 1;
+	right: 0px;
 }
 
 #modalContent img {
