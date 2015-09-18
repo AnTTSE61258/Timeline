@@ -233,7 +233,7 @@
 					onclick="hideModal()"> --%>
 			</div>
 			<div id="modalContent" class="modal-content"
-				style="min-height: 70vh; overflow: auto; max-height: 90vh; padding: 3%;">
+				style="min-height: 100vh; overflow: auto; max-height: 100vh; padding: 3%;">
 
 			</div>
 
