@@ -78,9 +78,36 @@
 		})
 	</script>
 
-	<button type="button" class="btn btn-default btn-lg" onclick="selectback()">
+	<button type="button" class="btn btn-default btn-lg"
+		onclick="selectback()">
 		<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>Trở về
 	</button>
+
+	<!-- ALL + UNCHECK ALL + RECOMMEND -->
+	<div class="row-utility">
+		<div class="col-md-4" style="text-align: center;">
+			<label class="btn-utility-checkbox" onclick="checkall();"> <span
+				class="[ glyphicon glyphicon-ok checkall ]"
+				style="visibility: hidden;"></span>
+			</label> <label class="btn-utility-title" onclick="checkall();"> Chọn
+				Tất cả </label>
+		</div>
+		<div class="col-md-4" style="text-align: center;">
+			<label class="btn-utility-checkbox" onclick="uncheckall();">
+				<span class="[ glyphicon glyphicon-ok uncheckall ]"
+				style="visibility: hidden;"></span>
+			</label> <label class="btn-utility-title" onclick="uncheckall();"> Bỏ
+				chọn Tất cả </label>
+		</div>
+		<div class="col-md-4" style="text-align: center;">
+			<label class="btn-utility-checkbox" onclick="recommend();"> <span
+				class="[ glyphicon glyphicon-ok recommend ]"
+				style="visibility: hidden;"></span>
+			</label> <label class="btn-utility-title" onclick="recommend();"> Gợi
+				ý </label>
+		</div>
+	</div>
+	<!-- ALL + UNCHECK ALL + RECOMMEND -->
 
 	<div class="row">
 		<!-- Vnexpress_Category -->
@@ -167,11 +194,13 @@
 			<!-- DanTricategory -->
 		</div>
 	</div>
-	
-	<button type="button" class="btn btn-default btn-lg" onclick="selectback()" style="width: 100%">
-		<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>Trở về
+
+	<button type="button" class="btn btn-default btn-lg"
+		onclick="selectback()" style="width: 100%">
+		<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>Trở
+		về
 	</button>
-	
+
 	<div id="getFeedBack">
 		<div class="form-group" align="center" style="margin-left: 10%">
 			<p>
@@ -185,7 +214,10 @@
 		</div>
 
 	</div>
+	<script type="text/javascript">
 
+	
+	</script>
 
 </body>
 </html>
