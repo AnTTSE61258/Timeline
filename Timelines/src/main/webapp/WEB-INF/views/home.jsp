@@ -363,6 +363,9 @@
 	</div>
 
 	<script>
+
+
+	
 		function getNext() {
 			jQuery.ajax({
 				type : "GET",
@@ -382,7 +385,28 @@
 				}
 			});
 		}
-		
+		//Fix issue loader not defined
+		var loader = new Sonic({
+			width: 100,
+			height: 100,
+			stepsPerFrame: 1,
+			trailLength: 1,
+			pointDistance: .02,
+			fps: 100,
+			fillColor: '#CB410B',
+			step: function(point, index) {
+				
+				this._.beginPath();
+				this._.moveTo(point.x, point.y);
+				this._.arc(point.x, point.y, index * 7, 0, Math.PI*2, false);
+				this._.closePath();
+				this._.fill();
+			},
+			path: [
+				['arc', 50, 50, 30, 0, 360]
+			]
+		});
+		//Fix issue loader not defined
 		function callPreviousAjax(){
 			jQuery.ajax({
 				type : "GET",
@@ -406,26 +430,6 @@
 		}
 
 		function getPrevious() {
-			var loader = new Sonic({
-				width: 100,
-				height: 100,
-				stepsPerFrame: 1,
-				trailLength: 1,
-				pointDistance: .02,
-				fps: 100,
-				fillColor: '#CB410B',
-				step: function(point, index) {
-					
-					this._.beginPath();
-					this._.moveTo(point.x, point.y);
-					this._.arc(point.x, point.y, index * 7, 0, Math.PI*2, false);
-					this._.closePath();
-					this._.fill();
-				},
-				path: [
-					['arc', 50, 50, 30, 0, 360]
-				]
-			});
 			$(".cd-timeline-year").hide();
 			$("#loadMoreButton").append(loader.canvas);
 			loader.play();
