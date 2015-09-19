@@ -70,25 +70,7 @@
 </script>
 
 <script type="text/javascript"
-	src='<c:url value="/resources/js/sonic.js"/>'></script>	
-
-<style type="text/css">
-#btn-newnews {
-	position: fixed;
-	padding: 5px 10px;	
-	border-radius: 5px;
-	display: table;
-	z-index: 100;
-	color: #000;
-	background: #ffff99;
-	margin-top: 10px;
-	display: table;
-	box-shadow: 5px 5px 3px #888;
-	cursor: pointer;
-	visibility: collapse;
-	text-align: center;
-}
-</style>	
+	src='<c:url value="/resources/js/sonic.js"/>'></script>		
 
 <%-- <script type="text/javascript"
 	src='<c:url value="/resources/js/bootstrap-notify.min.js"/>'></script> --%>
@@ -201,7 +183,6 @@
 				<!-- cd-timeline-block -->
 				</c:forEach>
 
-
 				<div id="loadMoreButton" class="cd-timeline-block load-more-block">
 					<div class="cd-timeline-year">
 						<h2>
@@ -217,12 +198,7 @@
 	</div>
 	</div>
 	</div>
-
-
 	</section>
-
-
-
 
 	<!-- Main modal -->
 	<div id="mainModal" class="modal bs-example-modal-lg"
@@ -251,21 +227,15 @@
 	<img id="selectchn-icon" onclick="switchToSelectChannel()"
 		alt="SELECT CHANNEL"
 		src='<c:url value="/resources/img/selectchn-icon.png"/>'>
-
-
-
 	</div>
+	
 	<div id="underConstructor">
 		<div>
 		This site is under construction.
-		</div>
-		
+		</div>		
 	</div>
 
-	<script>
-
-
-	
+	<script>	
 		function getNext() {
 			jQuery.ajax({
 				type : "GET",
@@ -408,13 +378,24 @@
 			var str_left = int_left.toString() + "px";
 			$('#btn-newnews').css("margin-left", str_left);
 		}
+		
+		function getScrollbarWidth() {
+			var $outer = $('<div>').css({visibility: 'hidden', width: 100, overflow: 'scroll'})
+								   .appendTo('body'),
+	        	widthWithScroll = $('<div>').css({width: '100%'})
+	        								.appendTo($outer).outerWidth();
+		    $outer.remove();
+		    
+		    return 100 - widthWithScroll;
+		}
 
 		$(document).ready(function() {
 			console.log("ViewDetails");
 			var url = "${dtItemLink}";
 			handleDetailItem(url);
 			
-			left_btnnewnews();
+			// set btn-newnews
+			left_btnnewnews();					
 			
 			window.onscroll = function(ev)
 			{
@@ -427,13 +408,14 @@
 					getNext();
 				}
 				*/
-
+				
 				if (D.scrollHeight - D.scrollTop == h) {
 					getPrevious();
 				}
+				
 				if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
 			        // at bottom
-					setTimeout(getPrevious,500);
+					setTimeout(getPrevious, 500);
 			    }
 			};
 		});

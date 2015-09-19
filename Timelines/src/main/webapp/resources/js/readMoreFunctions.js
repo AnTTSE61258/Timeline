@@ -3,6 +3,13 @@
  */
 
 function readMore(url) {
+	//Check has over-flowed
+	if (jQuery('.modal-dialog.modal-lg')[0].scrollHeight >  jQuery('.modal-dialog.modal-lg')[0].innerHeight()) {	    
+		// set right of iconCloseBound
+		var scrollbarWidth = getScrollbarWidth();
+		jQuery('#iconCloseBound').css("right", getScrollbarWidth() + "px");
+	}
+	
 	document.getElementById("modalContent").innerHTML = '<a href="' + url
 			+ '">' + url + '</a>';
 	var data = getResponseFromUrl(url);
