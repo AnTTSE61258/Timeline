@@ -395,7 +395,11 @@
 			handleDetailItem(url);
 			
 			// set btn-newnews
-			left_btnnewnews();					
+			left_btnnewnews();
+						
+			// set right of iconCloseBound
+			var scrollbarWidth = getScrollbarWidth();
+			jQuery('#iconCloseBound').css("right", getScrollbarWidth() + "px");
 			
 			window.onscroll = function(ev)
 			{
