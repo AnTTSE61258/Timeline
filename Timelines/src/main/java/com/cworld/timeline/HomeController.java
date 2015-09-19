@@ -7,6 +7,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -142,6 +143,7 @@ public class HomeController {
 	public String adminRefresh(Locale locale, Model model, HttpServletRequest request) {
 		String btn = request.getParameter("btnControl");
 		if (btn.equals("START SERVICE")) {
+			TimeZone.setDefault(TimeZone.getTimeZone("GMT+7:00"));
 			System.setProperty("http.agent", USER_AGENT);
 			updateService.startService();
 			updateService.startUpdateCacheListService();
@@ -152,7 +154,10 @@ public class HomeController {
 		if (btn.equals("GENERATE CACHE")) {
 			mgContentManager.refreshCurrentItems();
 		}
-		
+		if (btn.equals("CLEAR CACHE")){
+			mgContentManager.clearCurrentItems();
+			
+		}
 		return "redirect:" + "/admin";
 	}
 

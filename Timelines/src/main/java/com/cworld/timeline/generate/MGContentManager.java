@@ -242,6 +242,15 @@ public class MGContentManager {
 		return true;
 	}
 
+	public boolean clearCurrentItems(){
+		if (currentItems==null) {
+			return false;
+		}
+		currentItems = new ArrayList<Item>();
+		return true;
+		
+	}
+	
 	public boolean refreshCurrentItems() {
 
 		if (currentItems == null) {

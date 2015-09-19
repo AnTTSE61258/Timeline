@@ -1,3 +1,5 @@
+<%@page import="java.util.TimeZone"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="com.cworld.timeline.database.model.Item"%>
 <%@page import="java.util.Date"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -155,9 +157,17 @@
 
 							<div class="cd-timeline-img">
 									<%
+									
 									Item item = (Item) pageContext.getAttribute("item");
 									Date date = item.getAddDate();
-									out.println("<h2 style=\"padding-top: 8px\">"+date.getHours()+":"+date.getMinutes()+"</h2>");
+									
+									Calendar calendar = Calendar.getInstance();
+									calendar.setTime(date);
+									int hours = calendar.get(Calendar.HOUR_OF_DAY);
+									int minutes = calendar.get(Calendar.MINUTE);
+									int seconds = calendar.get(Calendar.SECOND);
+									
+									out.println("<h2 style=\"padding-top: 8px\">"+hours+":"+minutes+"</h2>");
 									%>
 							</div>
 							<!-- cd-timeline-img -->
