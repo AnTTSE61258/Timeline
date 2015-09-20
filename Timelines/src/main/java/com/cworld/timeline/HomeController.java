@@ -151,7 +151,7 @@ public class HomeController {
 	public String adminRefresh(Locale locale, Model model, HttpServletRequest request) {
 		String btn = request.getParameter("btnControl");
 		if (btn.equals("START SERVICE")) {
-			TimeZone.setDefault(TimeZone.getTimeZone("GMT+7:00"));
+			
 			System.setProperty("http.agent", USER_AGENT);
 			updateService.startService();
 			updateService.startUpdateCacheListService();

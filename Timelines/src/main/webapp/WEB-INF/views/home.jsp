@@ -1,3 +1,4 @@
+<%@page import="com.cworld.timeline.service.TimerStatus"%>
 <%@page import="java.util.TimeZone"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="com.cworld.timeline.database.model.Item"%>
@@ -161,12 +162,8 @@
 									
 									Item item = (Item) pageContext.getAttribute("item");
 									Date date = item.getAddDate();
-									
-									Calendar calendar = Calendar.getInstance();
-									calendar.setTime(date);
-									int hours = calendar.get(Calendar.HOUR_OF_DAY);
-									int minutes = calendar.get(Calendar.MINUTE);
-									int seconds = calendar.get(Calendar.SECOND);
+									int hours = date.getHours();
+									int minutes = date.getMinutes();
 									
 									out.println("<h2 style=\"padding-top: 8px\">"+hours+":"+minutes+"</h2>");
 									%>
