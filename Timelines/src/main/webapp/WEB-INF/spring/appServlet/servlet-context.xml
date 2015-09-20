@@ -56,6 +56,13 @@
 		</beans:constructor-arg>
 	</beans:bean>
 
+	<beans:bean id="itemContentDao"
+		class="com.cworld.timeline.database.dao.ItemContentDAOImpl">
+		<beans:constructor-arg>
+			<beans:ref bean="sessionFactory" />
+		</beans:constructor-arg>
+	</beans:bean>
+
 	<beans:bean id="updateService" class="com.cworld.timeline.service.UpdateService">
 	</beans:bean>
 
