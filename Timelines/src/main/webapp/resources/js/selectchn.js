@@ -1,15 +1,15 @@
 /**
  * 
  */
-//var host="/timeline"
-var host = "";
+var host="/timeline"
+//var host = "/";
 function selectchnPopupDisplay() {
 	jQuery("#selectChannelModal").modal('show');
 	
 }
 
 function switchToSelectChannel(){
-	window.location.href = host + "/selectchannel";
+	window.location.href = host + "selectchannel";
 	
 }
 

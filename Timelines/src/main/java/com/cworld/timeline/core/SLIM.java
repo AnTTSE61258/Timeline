@@ -20,6 +20,7 @@ public class SLIM {
 	public static final String CHANNEL_VNEXPRESS = "VNEXPRESS";
 	public static final String CHANNEL_KENH14 = "KENH14";
 	public static final String CHANNEL_DANTRI = "DANTRI";
+	public static final String CHANNEL_CUSTOM = "CUSTOM";
 	
 	// VNEXPRESS
 	public static final String VNEXPRESS_TRANGCHU = "http://vnexpress.net/rss/tin-moi-nhat.rss";

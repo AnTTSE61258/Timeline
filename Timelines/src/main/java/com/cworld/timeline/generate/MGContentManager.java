@@ -55,6 +55,10 @@ public class MGContentManager {
 		Item item;
 		while (currentItems!=null && items.size() < numberOfItem && currentPosition < currentItems.size()) {
 			item = currentItems.get(currentPosition);
+			if (item.getChannel()!=null && item.getChannel().equals(SLIM.CHANNEL_CUSTOM)) {
+				items.add(item);
+			}
+			
 			if (item.getChannel() != null && item.getChannel().equals(SLIM.CHANNEL_VNEXPRESS)) {
 				if (item.getCategory() != null && vnexpressChn.contains(item.getCategory())) {
 					items.add(item);
@@ -132,6 +136,11 @@ public class MGContentManager {
 		Item item;
 		while (items.size()<numberOfItem && currentPosition<position) {
 			item = currentItems.get(currentPosition);
+			if (item.getChannel()!=null && item.getChannel().equals(SLIM.CHANNEL_CUSTOM)) {
+				items.add(item);
+			}
+
+			
 			if (item.getChannel() != null && item.getChannel().equals(SLIM.CHANNEL_VNEXPRESS)) {
 				if (item.getCategory() != null && vnexpressChn.contains(item.getCategory())) {
 					items.add(item);
@@ -183,6 +192,11 @@ public class MGContentManager {
 		while (items.size()<numberOfItem && currentPosition < currentItems.size()) {// 5_9 fix issue getPreviousItems
 
 			item = currentItems.get(currentPosition);
+			
+			if (item.getChannel()!=null && item.getChannel().equals(SLIM.CHANNEL_CUSTOM)) {
+				items.add(item);
+			}
+
 			if (item.getChannel() != null && item.getChannel().equals(SLIM.CHANNEL_VNEXPRESS)) {
 				if (item.getCategory() != null && vnexpressChn.contains(item.getCategory())) {
 					items.add(item);

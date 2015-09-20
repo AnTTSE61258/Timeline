@@ -1,11 +1,28 @@
 package com.cworld.timeline.getContent;
 
+import java.util.List;
+
+import com.cworld.timeline.database.dao.ItemContentDAO;
+import com.cworld.timeline.database.model.ItemContent;
+
 public class GetContent {
-	public static String getContent(String url) throws Exception {
+	public static String getContent(ItemContentDAO itemContentDAO, String url,String seourl) throws Exception {
+		if (url==null || url.equals("")) {
+			return getContentWithSeoUrl(itemContentDAO, seourl);
+		}
+		
 		String rawResponse = GetResponse.getRespone(url);
 		return getModResponse(rawResponse, url);
 
 
+	}
+	
+	private static String getContentWithSeoUrl(ItemContentDAO itemContentDAO, String seourl){
+		List<ItemContent> itemContents =  itemContentDAO.getItemtContent(seourl);
+		if (itemContents==null || itemContents.size()==0) {
+			return "";
+		}
+		return itemContents.get(0).getContent();
 	}
 
 	private static String getModResponse(String rawResponse, String url) {

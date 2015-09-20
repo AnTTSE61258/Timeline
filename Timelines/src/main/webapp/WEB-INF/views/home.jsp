@@ -176,7 +176,7 @@
 									<div class="content-padding">
 										<a data-toggle="modal" data-target=".bs-example-modal-lg"
 											href="javascript:;" class="post-title"
-											onclick="readMore('${item.link}')"><h2>${item.title }</h2></a>
+											onclick="readMore('${item.link}','${item.seourl}')"><h2>${item.title }</h2></a>
 
 
 										<div class="post-content">
@@ -184,11 +184,11 @@
 										</div>
 										<button class="btn btn-primary btn-default cd-read-more"
 											data-toggle="modal" data-target=".bs-example-modal-lg"
-											onclick="readMore('${item.link}')">Read more</button>
+											onclick="readMore('${item.link}','${item.seourl }')">Read more</button>
 										<div class="clearfix"></div>
 										<div class="cd-author">
 											<a data-toggle="modal" data-target=".bs-example-modal-lg"
-												href="javascript:;"	onclick="readMore('${item.link}')">
+												href="javascript:;"	onclick="readMore('${item.link}','${item.seourl }')">
 												<img class="lazy" data-original=${item.smallImage} alt=""
 													style="width: 150px" />
 											</a>													

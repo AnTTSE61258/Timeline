@@ -14,10 +14,14 @@
 		<property name="link" column="link" />
 		<property name="guid" column="guid" />
 		<property name="addDate" column="addDate" />
-		<property name="category" column="category"/>
-		<property name="seourl" column="seourl"/>
-		<property name="desWithoutImage" column="desWithoutImage"/>
-		<property name="smallImage" column="smallImage"/>
+		<property name="category" column="category" />
+		<property name="seourl" column="seourl" />
+		<property name="desWithoutImage" column="desWithoutImage" />
+		<property name="smallImage" column="smallImage" />
 	</class>
 
+	<class name="ItemContent" table="ItemContent">
+		<id name="seourl" column="seourl"></id>
+		<property name="content" column="content"></property>
+	</class>
 </hibernate-mapping>

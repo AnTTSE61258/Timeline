@@ -38,7 +38,12 @@
 										+'href="javascript:;" class="post-title"'
 										+'onclick="readMore(\''
 										+item.link
-										+'\')"><h2>'+item.title+'</h2></a>'
+										+'\''
+										+ ','
+										+ '\''
+										+ item.seourl
+										+ '\''
+										+')"><h2>'+item.title+'</h2></a>'
 
 
 									+ '<div class="post-content">'
@@ -50,6 +55,10 @@
 									+ '\''
 									+ item.link
 									+ '\''
+									+ ','
+									+ '\''
+									+ item.seourl
+									+ '\''
 									+ ')">Read'
 									+ 'more</button>'
 									+ '<div class="clearfix"></div>'
@@ -59,6 +68,10 @@
 									+ 'onclick="readMore('
 									+ '\''
 									+ item.link
+									+ '\''
+									+ ','
+									+ '\''
+									+ item.seourl
 									+ '\''
 									+ ')">'
 									+ '<img src='+item.smallImage+' class="media-object img-responsive" alt="" style="width: 150px"/>'
@@ -99,6 +112,10 @@
 									+'\''
 									+item.link
 									+'\''
+									+ ','
+									+ '\''
+									+ item.seourl
+									+ '\''
 									+')"><h2>'+item.title+'</h2></a>'
 
 
@@ -111,6 +128,10 @@
 									+ '\''
 									+ item.link
 									+ '\''
+									+ ','
+									+ '\''
+									+ item.seourl
+									+ '\''
 									+ ')">Read'
 									+ 'more</button>'
 									+ '<div class="clearfix"></div>'
@@ -120,6 +141,10 @@
 									+ 'onclick="readMore('
 									+ '\''
 									+ item.link
+									+ '\''
+									+ ','
+									+ '\''
+									+ item.seourl
 									+ '\''
 									+ ')">'
 									+ '<img src='+item.smallImage+' class="media-object img-responsive" alt="" style="width: 150px"/>'
