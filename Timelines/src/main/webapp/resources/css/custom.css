@@ -8,7 +8,7 @@
 #icon-close {
 	cursor: pointer;
 	float: right;
-	border-radius: 20px 0px 0px 20px;
+	border-radius: 0px 0px 0px 10px;
 }
 
 #iconCloseBound {
@@ -91,20 +91,4 @@
 	margin-left: -50px;
 	margin-top: 30px;
 	height: 70px;
-}
-
-#btn-newnews {
-	position: fixed;
-	padding: 5px 10px;	
-	border-radius: 5px;
-	display: table;
-	z-index: 100;
-	color: #000;
-	background: #ffff99;
-	margin-top: 10px;
-	display: table;
-	box-shadow: 5px 5px 3px #888;
-	cursor: pointer;
-	visibility: collapse;
-	text-align: center;
 }
