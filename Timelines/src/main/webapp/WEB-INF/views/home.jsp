@@ -5,6 +5,7 @@
 <%@page import="java.util.Date"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page session="false" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html lang="en-US">
@@ -158,15 +159,8 @@
 							</c:if>
 
 							<div class="cd-timeline-img">
-									<%
-									
-									Item item = (Item) pageContext.getAttribute("item");
-									Date date = item.getAddDate();
-									int hours = date.getHours();
-									int minutes = date.getMinutes();
-									
-									out.println("<h2 style=\"padding-top: 8px\">"+hours+":"+minutes+"</h2>");
-									%>
+								<fmt:parseDate value="${item.addDate}" pattern="yyyy-MM-dd HH:mm:ss" var="date" timeZone="GMT-15"/>
+								${date.hours }:${date.minutes }
 							</div>
 							<!-- cd-timeline-img -->
 							<div class="cd-timeline-content ">
