@@ -1,5 +1,6 @@
 package com.cworld.timeline;
 
+import java.awt.Dialog.ModalExclusionType;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -192,6 +193,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/post-new", method = RequestMethod.POST)
 	public String post(Locale locale, Model model, HttpServletRequest request) {
+		StringBuilder result = new StringBuilder();
 		Item item;
 		ItemContent itemContent;
 		String title = request.getParameter("txtTitle");
@@ -206,10 +208,18 @@ public class HomeController {
 		itemContent = new ItemContent(seourl, content);
 		if (itemDAO.findItemBySeourl(seourl)==null) {
 			itemDAO.addItem(item);
+			result.append("Add tin tức thành công\n");
+		}else{
+			result.append("Add tin tức không thành công\n");
 		}
 		if (itemContentDAO.getItemtContent(seourl)==null || itemContentDAO.getItemtContent(seourl).size()==0) {
 			itemContentDAO.addItemContent(itemContent);
+			result.append("Add nội dung thành công\n");
+		}else{
+			result.append("Add nội dung không thành công\n");
 		}
-		return "postNew";
+		model.addAttribute("result", result);
+	
+		return "postNewResult";
 	}
 }
