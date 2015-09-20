@@ -100,6 +100,7 @@
 	<!-- PARAMETERS -->
 	<c:set var="textLoadMore" value="Cũ hơn"></c:set>
 	<c:set var="dtItemLink" value="${detailItem.link}"></c:set>
+	<c:set var="dtItemSeourl" value = "${detailItem.seourl}"></c:set>
 	<script>
 		var previousPoint;
 		var nextPoint;
@@ -412,7 +413,8 @@
 		$(document).ready(function() {
 			console.log("ViewDetails");
 			var url = "${dtItemLink}";
-			handleDetailItem(url);
+			var seourl = "${dtItemSeourl}";
+			handleDetailItem(url,seourl);
 			
 			left_btnnewnews();
 			

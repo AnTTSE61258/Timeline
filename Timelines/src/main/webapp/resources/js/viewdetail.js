@@ -4,13 +4,13 @@
 
 
 
-function handleDetailItem(url) {
-	if (url == '') {
+function handleDetailItem(url,seourl) {
+	if (url === '' && seourl === '') {
 		return;
 	}
 
 	else {
-		var data = readMore(url);
+		var data = readMore(url,seourl);
 		
 		showModal();
 	}
