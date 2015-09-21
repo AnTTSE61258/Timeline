@@ -245,7 +245,151 @@
 		src='<c:url value="/resources/img/selectchn-icon.png"/>'>
 
 
+	<!-- Select Channel modal -->
+	<div id="selectChannelModal" class="modal fade " tabindex="-1"
+		role="dialog" aria-labelledby="myLargeModalLabel">
+		<div class="modal-dialog modal-lg">
+			<div id="iconCloseBound">
+				<img id="icon-close" alt="Close"
+					src='<c:url value="/resources/img/close-icon.png"/>'
+					onclick="hideSelectChnModal()">
+			</div>
+			<div id="selectChannelModalContent" class="modal-content"
+				style="min-height: 70vh; overflow: auto; max-height: 90vh; padding: 4vh;">
 
+				<div class="row">
+					<!-- Vnexpress_Category -->
+					<div id="categoryBound_vnexpress" class="col-md-4"">
+						<img class="newslogo" alt="Vnexpess"
+							src='<c:url value="/resources/img/logo/logo_vnexpress.jpg"/>'
+							style="margin-left: 20%">
+
+
+						<c:forEach var="cateItem" items="${vnexpressCategory}">
+							<div class="[ form-group ]">
+								<input class="checkbox-chn" name="fancy-checkbox-default"
+									id="fancy-checkbox-${cateItem.cookie}-vnexpress"
+									value="${cateItem.cookie}" autocomplete="off" type="checkbox">
+								<div class="[ btn-group ]" style="width: 80%; margin-left: 20%">
+									<label
+										style="border-radius: 10px 0px; background: #9F224E none repeat scroll 0% 0%;"
+										for="fancy-checkbox-${cateItem.cookie}-vnexpress"
+										class="[ btn btn-default"> <span
+										class="[ glyphicon glyphicon-ok ]"></span> <span>&nbsp;</span>
+									</label> <label style="border-radius: 0px 0px 0px 5px; width: 60%;"
+										"
+										for="fancy-checkbox-${cateItem.cookie}-vnexpress"
+										class="[ btn btn-default active ]">
+										${cateItem.displayName}</label>
+								</div>
+							</div>
+
+						</c:forEach>
+					</div>
+					<!-- Vnexpress_Category -->
+					<div id="categoryBound_kenh14" class="col-md-4">
+						<!-- Kenh14_Category -->
+						<img class="newslogo" alt="Kenh14"
+							src='<c:url value="/resources/img/logo/logo_kenh14.jpg"/>'
+							style="margin-left: 20%">
+
+						<c:forEach var="cateItem" items="${kenh14Category}">
+							<div class="[ form-group ]">
+								<input class="checkbox-chn" name="fancy-checkbox-default"
+									id="fancy-checkbox-${cateItem.cookie}-vnexpress"
+									value="${cateItem.cookie}" autocomplete="off" type="checkbox">
+								<div class="[ btn-group ]" style="width: 80%; margin-left: 20%">
+									<label
+										style="border-radius: 10px 0px; background: #C44718 none repeat scroll 0% 0%;"
+										for="fancy-checkbox-${cateItem.cookie}-vnexpress"
+										class="[ btn btn-default"> <span
+										class="[ glyphicon glyphicon-ok ]"></span> <span>&nbsp;</span>
+									</label> <label style="border-radius: 0px 0px 0px 5px; width: 60%;"
+										for="fancy-checkbox-${cateItem.cookie}-vnexpress"
+										class="[ btn btn-default active ]">
+										${cateItem.displayName}</label>
+								</div>
+							</div>
+						</c:forEach>
+
+						<!-- Kenh14_Category -->
+					</div>
+					<div id="categoryBound_dantri" class="col-md-4">
+						<!-- DanTri_category -->
+						<img class="newslogo" alt="Kenh14"
+							src='<c:url value="/resources/img/logo/logo_dantri.jpg"/>'
+							style="margin-left: 20%">
+
+						<c:forEach var="cateItem" items="${dantriCategory}">
+							<div class="[ form-group ]">
+								<input class="checkbox-chn" name="fancy-checkbox-default"
+									id="fancy-checkbox-${cateItem.cookie}-vnexpress"
+									value="${cateItem.cookie}" autocomplete="off" type="checkbox">
+								<div class="[ btn-group ]" style="width: 80%; margin-left: 20%">
+									<label
+										style="border-radius: 10px 0px; background: #00622A none repeat scroll 0% 0%;"
+										for="fancy-checkbox-${cateItem.cookie}-vnexpress"
+										class="[ btn btn-default"> <span
+										class="[ glyphicon glyphicon-ok ]"></span> <span>&nbsp;</span>
+									</label> <label style="border-radius: 0px 0px 0px 5px; width: 60%;"
+										for="fancy-checkbox-${cateItem.cookie}-vnexpress"
+										class="[ btn btn-default active ]">
+										${cateItem.displayName}</label>
+								</div>
+							</div>
+						</c:forEach>
+
+						<!-- DanTricategory -->						
+					</div>										
+				</div>
+				<!-- ALL + UNCHECK ALL + RECOMMEND -->
+				<div class="row-utility">				
+					<div class="col-md-4" style="text-align: right;">
+						<label class="btn-utility-checkbox" onclick="checkall();"> 
+							<span class="[ glyphicon glyphicon-ok checkall ]"
+								  style="visibility: hidden;"></span>
+						</label> 
+						<label class="btn-utility-title" onclick="checkall();">
+							Chọn Tất cả
+						</label>
+					</div>
+					<div class="col-md-4" style="text-align: center;">
+						<label class="btn-utility-checkbox" onclick="uncheckall();"> 
+							<span class="[ glyphicon glyphicon-ok uncheckall ]"
+								  style="visibility: hidden;"></span>
+						</label> 
+						<label class="btn-utility-title" onclick="uncheckall();">
+							Bỏ chọn Tất cả
+						</label>
+					</div>
+					<div class="col-md-4" style="text-align: left;">
+						<label class="btn-utility-checkbox" onclick="recommend();"> 
+							<span class="[ glyphicon glyphicon-ok recommend ]"
+								  style="visibility: hidden;"></span>
+						</label> 
+						<label class="btn-utility-title" onclick="recommend();">
+							Gợi ý
+						</label>
+					</div>
+				</div>
+				<!-- ALL + UNCHECK ALL + RECOMMEND -->
+				<div id="getFeedBack">
+					<div class="form-group" align="center" style="margin-left: 10%">
+						<p>
+							<i>Không tìm thấy trang yêu thích của bạn? Hảy gửi yêu cầu
+								cho chúng tôi</i>
+						</p>
+
+						<input type="text" class="form-control" id="feedBackContent"
+							style="width: 70%; float: left;"> <input type="button"
+							class="btn" style="width: 10" value="Gửi">
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
 	</div>
 	<div id="underConstructor">
 		<div>
@@ -255,9 +399,6 @@
 	</div>
 
 	<script>
-
-
-	
 		function getNext() {
 			jQuery.ajax({
 				type : "GET",
@@ -430,6 +571,40 @@
 			    }
 			};
 		});
+		
+		<!-- ALL + UNCHECK ALL + RECOMMEND -->
+		function checkall() {
+			$('.form-group').each(function() {
+				var checkBoxItem = $(this).children('.checkbox-chn');
+				if (!checkBoxItem.is(":checked")) {
+					$(this).children('.btn-group').children('.active').click();
+				}
+			});
+			
+			$('span.checkall').css("visibility", "visible");
+			$('span.uncheckall').css("visibility", "hidden");
+			$('span.recommend').css("visibility", "hidden");
+		}
+		
+		function uncheckall() {
+			$('.form-group').each(function() {
+				var checkBoxItem = $(this).children('.checkbox-chn');
+				if (checkBoxItem.is(":checked")) {
+					$(this).children('.btn-group').children('.active').click();
+				}
+			});
+			
+			$('span.checkall').css("visibility", "hidden");
+			$('span.uncheckall').css("visibility", "visible");
+			$('span.recommend').css("visibility", "hidden");			
+		}
+		
+		function recommend() {
+			$('span.checkall').css("visibility", "hidden");
+			$('span.uncheckall').css("visibility", "hidden");
+			$('span.recommend').css("visibility", "visible");
+		}
+		<!-- ALL + UNCHECK ALL + RECOMMEND -->
 
 		function displayNotification() {
 		

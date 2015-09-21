@@ -72,8 +72,31 @@
 
 .newslogo{
 	max-width: 200px;
-	max-height: 75px;
-	
+	max-height: 75px;	
+}
+
+.row-utility div {
+	/*text-align: center;*/
+	margin: 50px 0px;
+}
+
+.btn-utility-checkbox {
+	border-radius: 10px 0px; 
+	background: #00688B none repeat scroll 0% 0%;
+	text-align: center;
+	padding: 0 10px;
+	color: white;
+	cursor: pointer;
+}
+
+.btn-utility-title {
+	border-radius: 0px 0px 0px 5px;
+	width: 60%;
+	text-align: center;
+	color: #333;
+	background-color: #E6E6E6;
+	border-color: #ADADAD;
+	cursor: pointer;	
 }
 #secondaryCloseDiv{
 	text-align: center;

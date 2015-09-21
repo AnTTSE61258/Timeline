@@ -114,3 +114,53 @@ function selectback(){
 	saveCookie();
 	window.location.href = host;
 }
+
+
+var recommendChannels = ["vne_TrangChu","vne_GiaiTri","vne_KhoaHoc","ken_TrangChu","ken_Star",
+                 		 "dan_TrangChu","dan_GiaiTri"]
+//<!-- ALL + UNCHECK ALL + RECOMMEND -->
+function checkall() {
+	$('.form-group').each(function() {
+		var checkBoxItem = $(this).children('.checkbox-chn');
+		if (!checkBoxItem.is(":checked")) {
+			$(this).children('.btn-group').children('.active').click();
+		}
+	});
+
+	$('span.checkall').css("visibility", "visible");
+	$('span.uncheckall').css("visibility", "hidden");
+	$('span.recommend').css("visibility", "hidden");
+}
+
+function uncheckall() {
+	$('.form-group').each(function() {
+		var checkBoxItem = $(this).children('.checkbox-chn');
+		if (checkBoxItem.is(":checked")) {
+			$(this).children('.btn-group').children('.active').click();
+		}
+	});
+
+	$('span.checkall').css("visibility", "hidden");
+	$('span.uncheckall').css("visibility", "visible");
+	$('span.recommend').css("visibility", "hidden");
+}
+
+function recommend() {
+	uncheckall();
+	
+	$('.form-group').each(function() {
+		var checkBoxItem = $(this).children('.checkbox-chn');
+		if ($.inArray(checkBoxItem.val(),recommendChannels)>=0) {
+			if (!checkBoxItem.is(":checked")) {
+				$(this).children('.btn-group').children('.active').click();
+			}
+		}
+		
+	});
+
+	
+	$('span.checkall').css("visibility", "hidden");
+	$('span.uncheckall').css("visibility", "hidden");
+	$('span.recommend').css("visibility", "visible");
+}
+//<!--ALL + UNCHECK ALL + RECOMMEND-->
