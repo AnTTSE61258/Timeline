@@ -1,8 +1,8 @@
 /**
  * 
  */
-//var host="/timeline"
-var host = "/";
+var host="/timeline/";
+//var host = "/";
 function selectchnPopupDisplay() {
 	jQuery("#selectChannelModal").modal('show');
 	

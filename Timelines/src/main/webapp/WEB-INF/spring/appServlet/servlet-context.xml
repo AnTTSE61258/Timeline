@@ -32,6 +32,11 @@
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close">
 		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<!-- <beans:property name="url"
+			value="jdbc:mysql://127.4.128.130:3306/TIMELINE?characterEncoding=UTF-8" />
+		<beans:property name="username" value="adminQzmrxy5" />
+		<beans:property name="password" value="i2r6DmayIZMf" /> -->
+		
 		<beans:property name="url"
 			value="jdbc:mysql://localhost:3306/TIMELINE?characterEncoding=UTF-8" />
 		<beans:property name="username" value="root" />
