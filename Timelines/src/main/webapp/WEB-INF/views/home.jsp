@@ -11,15 +11,15 @@
 <html lang="en-US">
 <head>
 <meta charset="UTF-8">
-<meta name="keywords" content="" />
-<meta name="description" content="">
+<meta name="keywords" content="doc bao,tin tuc,dong thoi gian,tin moi,bao moi,tin viet,giai tri" />
+<meta name="description" content="Tổng hợp tin tức Việt Nam nhanh nhất, giao diện đẹp, tiện sử dụng">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <script type="text/javascript"
 	src='<c:url value="/resources/js/readMoreFunctions.js"/>'></script>
 <!-- Title -->
-<title>Timeline</title>
+<title>Dòng thời gian| Tổng hợp tin tức Việt | Đọc báo | Tin mới</title>
 
 <!-- Favicon -->
 <link rel="shortcut icon" type="image/x-icon"
@@ -419,8 +419,8 @@
 			});
 		}
 		//Fix issue loader not defined
-		var loader;
 		//Fix issue loader not defined
+		var loader;
 		function callPreviousAjax(){
 			jQuery.ajax({
 				type : "GET",
@@ -429,6 +429,8 @@
 					previousPoint : previousPoint
 				},
 				success : function(data) {
+					$(".sonic").remove();
+					$(".sonicChrome").remove();
 					if (data.length === 0) {
 						return;
 					}
@@ -436,16 +438,17 @@
 					addItemsToTail(data);
 				},
 				error : function(data) {
+					$(".sonic").remove();
+					$(".sonicChrome").remove();
 					console.log("Get previous Error: " + data);
 				}
 			});
 			$(".cd-timeline-year").show();
-			loader.stop();
 		}
 
 		function getPrevious() {
 		//create new Sonic each getPrevious;
-		loader = new Sonic({
+		var loader = new Sonic({
 				width: 100,
 				height: 100,
 				stepsPerFrame: 1,
@@ -466,11 +469,14 @@
 				]
 			});
 
-		//create new Sonic each getPrevious;
-			
+			//create new Sonic each getPrevious;
 			$(".cd-timeline-year").hide();
 			$("#loadMoreButton").append(loader.canvas);
 			loader.play();
+			var agent = navigator.userAgent;
+			if(agent.indexOf("Chrome") != -1 && agent.indexOf("Mobile") == -1){
+				$(".sonic").attr('class', 'sonicChrome');
+			}
 			setTimeout(callPreviousAjax,1000);
 		}
 
@@ -561,13 +567,10 @@
 					getNext();
 				}
 				*/
-
-				if (D.scrollHeight - D.scrollTop == h) {
-					getPrevious();
-				}
-				if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+				
+				if (window.pageYOffset >= document.body.scrollHeight - document.documentElement.clientHeight) {
 			        // at bottom
-					setTimeout(getPrevious,500);
+					setTimeout(getPrevious,1000);
 			    }
 			};
 		});

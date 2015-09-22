@@ -109,9 +109,24 @@
 }
 
 .sonic{
+	height: 70px;
+	margin: auto;
+	display: block;
+	margin-top: 100px;
+}
+
+.sonicChrome{
 	position: absolute;
 	left: 50%;
-	margin-left: -50px;
-	margin-top: 30px;
+	margin-left: -35px;
+	margin-top: 10px;
 	height: 70px;
+}
+
+
+.sonicModal{
+	display: block;
+	margin: auto;
+	margin-top: 25%;
+	height: 80px;
 }
