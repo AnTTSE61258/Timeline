@@ -106,6 +106,7 @@
 	<script>
 		var previousPoint;
 		var nextPoint;
+		var isGettingPrevious;
 	</script>
 
 	<script>
@@ -413,6 +414,7 @@
 		//Fix issue loader not defined
 
 		function callPreviousAjax(){
+			isGettingPrevious = true;
 			jQuery.ajax({
 				type : "GET",
 				url : "getPrevious",
@@ -427,10 +429,12 @@
 					}
 					console.log("Get previous. Result = " + data.length);
 					addItemsToTail(data);
+					isGettingPrevious = false;
 				},
 				error : function(data) {
 					$(".sonic").remove();
 					$(".sonicChrome").remove();
+					isGettingPrevious = false;
 					console.log("Get previous Error: " + data);
 				}
 			});
@@ -438,7 +442,12 @@
 		}
 
 		function getPrevious() {
-		//create new Sonic each getPrevious;
+		//create new Sonic each getPrevious;]
+		if (isGettingPrevious === true){
+			return;
+		}
+
+			
 		var loader = new Sonic({
 				width: 100,
 				height: 100,
@@ -566,39 +575,6 @@
 			};				
 		});
 		
-		<!-- ALL + UNCHECK ALL + RECOMMEND -->
-		function checkall() {
-			$('.form-group').each(function() {
-				var checkBoxItem = $(this).children('.checkbox-chn');
-				if (!checkBoxItem.is(":checked")) {
-					$(this).children('.btn-group').children('.active').click();
-				}
-			});
-			
-			$('span.checkall').css("visibility", "visible");
-			$('span.uncheckall').css("visibility", "hidden");
-			$('span.recommend').css("visibility", "hidden");
-		}
-		
-		function uncheckall() {
-			$('.form-group').each(function() {
-				var checkBoxItem = $(this).children('.checkbox-chn');
-				if (checkBoxItem.is(":checked")) {
-					$(this).children('.btn-group').children('.active').click();
-				}
-			});
-			
-			$('span.checkall').css("visibility", "hidden");
-			$('span.uncheckall').css("visibility", "visible");
-			$('span.recommend').css("visibility", "hidden");			
-		}
-		
-		function recommend() {
-			$('span.checkall').css("visibility", "hidden");
-			$('span.uncheckall').css("visibility", "hidden");
-			$('span.recommend').css("visibility", "visible");
-		}
-		<!-- ALL + UNCHECK ALL + RECOMMEND -->
 
 		function displayNotification() {
 		
