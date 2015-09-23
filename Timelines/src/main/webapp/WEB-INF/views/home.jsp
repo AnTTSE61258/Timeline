@@ -419,8 +419,7 @@
 			});
 		}
 		//Fix issue loader not defined
-		//Fix issue loader not defined
-		var loader;
+
 		function callPreviousAjax(){
 			jQuery.ajax({
 				type : "GET",
@@ -474,8 +473,8 @@
 			$("#loadMoreButton").append(loader.canvas);
 			loader.play();
 			var agent = navigator.userAgent;
-			if(agent.indexOf("Chrome") != -1 && agent.indexOf("Mobile") == -1){
-				$(".sonic").attr('class', 'sonicChrome');
+			if(agent.indexOf("Mobile") != -1){
+				$(".sonic").attr('class', 'sonicMobile');
 			}
 			setTimeout(callPreviousAjax,1000);
 		}
