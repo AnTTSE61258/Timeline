@@ -132,7 +132,6 @@
 			src='<c:url value="/resources/img/background.jpg"/>' alt="">
 	</div>
 	<section class="main-listing">		
-
 		<div class="container">		
 			<div class="row">
 				<div id="btn-newnews" onclick="gotop();">
@@ -193,13 +192,11 @@
 				<!-- cd-timeline-block -->
 				</c:forEach>
 
-
 				<div id="loadMoreButton" class="cd-timeline-block load-more-block">
 					<div class="cd-timeline-year">
 						<h2>
 							<a href="javascript:;"><c:out
 									value="${textLoadMore}"></c:out></a>
-
 						</h2>
 					</div>
 					<!-- cd-timeline-img -->
@@ -210,15 +207,10 @@
 	</div>
 	</div>
 
-
 	</section>
-
-
-
-
 	<!-- Main modal -->
-	<div id="mainModal" class="modal bs-example-modal-lg"
-		tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	<div id="mainModal" class="modal bs-example-modal-lg" 
+		 role="dialog" aria-labelledby="myLargeModalLabel">
 		<div class="modal-dialog modal-lg" style="width: 100%;margin: 0%">
 			<div id="iconCloseBound" align="right">
 			
@@ -572,7 +564,7 @@
 			        // at bottom
 					setTimeout(getPrevious,1000);
 			    }
-			};
+			};				
 		});
 		
 		<!-- ALL + UNCHECK ALL + RECOMMEND -->
